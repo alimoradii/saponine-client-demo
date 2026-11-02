@@ -1,30 +1,39 @@
-# Saponine website demos
+# Saponine · سه دموی وب‌سایت
 
-Three independent Persian RTL website concepts using supplied IRANSans fonts.
+بازطراحی سه دمو با ساختار تمام‌صفحه و زبان بصری الهام‌گرفته از آدریان سلامت، بر اساس سه پیش‌طرح تصویری انتخاب‌شده و لوگوی رسمی ارسالی ساپونین.
 
-| Folder | Design | Live preview |
-| --- | --- | --- |
-| source | Light brand presentation | https://saponine-client-demo.onrender.com/ |
-| motion | Scroll-driven photo presentation in 3D space | https://saponine-motion-demo.onrender.com/ |
-| reference | Full-screen Adrian Salamat reference layout | https://saponine-reference-demo.onrender.com/ |
+| دمو | جهت طراحی | لینک عمومی | مسیر سورس |
+| --- | --- | --- | --- |
+| اول | ویترین روشن؛ یاسی، سفید و خاکستری | https://saponine-client-demo.onrender.com/ | source/ |
+| دوم | روایت شناور؛ بنفش تیره و حرکت با اسکرول | https://saponine-motion-demo.onrender.com/ | motion/ |
+| سوم | گالری محصولات؛ نمایش چند محصول در صحنه | https://saponine-reference-demo.onrender.com/ | reference/ |
 
-Product photos come from https://saponineco.com/. The products shown are
-Sapo-Zinc 2%, Bibacter Gel 70%, Povidone Iodine 10%, Permethrin 1%, and
-Vitamin B1 300 mg. Concepts 01 and 02 feature the first three.
+هر سه دمو از فونت محلی IRANSans، عکس‌های واقعی دوربری‌شدهٔ محصولات ساپونین، لوگوی اصلی کاربر و پالت بنفش/یاسی/خاکستری استفاده می‌کنند. بسته‌بندی محصولات در این بازطراحی تغییر رنگ یا بازطراحی نشده است.
 
-The displayed assets are transparent background-removal edits of the official
-photos. Original downloads are retained for comparison. No invented product
-names, reconstructed package models, or generated still-life images are shown.
-See IMAGE-EDIT-PROMPTS.md for the editing brief and each folder's
-assets/official-photo-sources.json for source URLs and SHA-256 hashes.
+امکانات فعال: ناوبری بخش‌ها، منوی موبایل، جستجو و حالت بدون نتیجه، فیلتر دستهٔ محصول، گالری انتخاب محصول، پنجرهٔ جزئیات با لینک صفحهٔ رسمی، مرور قبلی/بعدی محصول، کاهش حرکت، و آماده‌سازی متن درخواست همکاری برای کپی. فرم‌ها اطلاعات را ارسال یا ذخیره نمی‌کنند.
 
-The image frames move with CSS perspective, scroll and drag interactions.
-This is not a claimed 360-degree product scan. Reduced-motion support remains.
+حرکت محصولات با تصویر واقعی در فضای پرسپکتیو و انیمیشن اسکرول پیاده شده است؛ این نمایش، مدل حجمی یا اسکن ۳۶۰ درجهٔ بسته‌بندی نیست. پس‌زمینه‌های صحنه، دارایی‌های تصویری جدا از عکس محصولات‌اند.
 
-No dependencies or build step. Serve one directory using a static HTTP server.
-Render Static Site: build command true; publish directory source, motion,
-or reference. Forms do not send/store submissions. These are HTML demos,
-not installable WordPress themes. Demo indexing is disabled.
+## فایل طراحی
 
-Validation: JavaScript syntax, local assets/anchors and cutout alpha inspected;
-desktop/mobile visual review and product selection/search/dialogs exercised.
+[Figma · سه طرح ساپونین](https://www.figma.com/design/XoysqwWyrB460D6e7KmjFg)
+
+صفحه‌ها شامل متن‌های مستقل، عکس محصول، لوگو، آیکن‌های برداری و انتخاب‌گر محصول هستند. اطلاعات فونت IRANSans در لایه‌ها حفظ شده؛ برای ویرایش متن باید این فونت در محیط Figma در دسترس باشد.
+
+## توسعه
+
+هر مسیر source، motion و reference یک وب‌سایت مستقل HTML/CSS/JS است و به نصب وابستگی یا سرویس خارجی نیاز ندارد. فایل‌های website.css و website.js مبنای مشترک‌اند؛ build-demos.py خروجی هر سه پوشه و پیش‌نمایش محلی dist را آماده می‌کند.
+
+دستور بازسازی: python3 build-demos.py
+
+برای Render، همان سرویس‌های قبلی از شاخهٔ main و پوشهٔ متناظر منتشر می‌شوند. فایل‌های capture.html فقط هنگام ساخت پیش‌نمایش محلی در dist ایجاد می‌شوند و جزو مسیر انتشار سه دمو نیستند.
+
+## منابع و بررسی
+
+- BRAND-IDENTITY.md: رنگ‌ها و اصالت لوگوی ارسالی.
+- assets/official-photo-sources.json در هر دمو: منبع عکس‌های محصول و عملیات حذف پس‌زمینه.
+- assets/brand-identity.json: مشخصات هویت سازمانی جدید.
+- design-qa.md: بررسی بصری و عملکردی دسکتاپ، موبایل و تبلت.
+- FEATHER-LICENSE.txt: مجوز آیکن‌های Feather.
+
+دارایی‌ها و فایل‌های قدیمیِ بدون ارجاع ممکن است برای حفظ تاریخچه در مخزن باقی بمانند؛ صفحات فعال از عکس‌های رسمی و منابع مشخص‌شده استفاده می‌کنند.

@@ -1,0 +1,6 @@
+dist/
+.openai/
+upload-manifest.json
+upload-extras.json
+git-tree-base.json
+tool-manifest-verified.json

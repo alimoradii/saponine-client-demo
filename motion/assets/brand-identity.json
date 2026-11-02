@@ -1,0 +1,16 @@
+{
+  "logo": {
+    "file": "saponine-logo.png",
+    "source": "User-supplied official artwork (2026-11-02)",
+    "sha256": "2ef4c36f10735b2992956f18b47d12a85bb7293c8ad76e4537bc6711522c64fd",
+    "operation": "Original bytes unchanged; CSS viewport trims outer white margins only."
+  },
+  "colors": {
+    "charcoal": "#3c3c3a",
+    "purple": "#7d4697",
+    "blush": "#e5afd1",
+    "paper": "#fcf9fc",
+    "darkScene": "#2d2136"
+  },
+  "productPhotos": "Existing official product cutouts preserved unchanged; scene backgrounds are separate generated assets."
+}
