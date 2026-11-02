@@ -1,19 +1,21 @@
-# Saponine — Motion concept 02
+# Saponine — motion
 
-Independent Persian RTL concept demo. Serve this directory as a static website.
-Main scene uses native WebGL and locally generated 3D bottle/carton geometry.
-Textures are created from the supplied Saponine logo. No external CDN dependency.
+Persian RTL static website with supplied IRANSans webfonts.
 
-- Four scroll chapters move and rotate the scene, with a separated cap detail.
-- Drag or use arrow keys on the product canvas to rotate the model.
-- Three packaging palettes; collection dialogs; contact request copy tool.
-- Reduced-motion support, local font files, mobile-specific composition.
-- A Canvas 2D geometry renderer supports browsers without WebGL; a local poster is the final fallback.
-- Static concept content. Product names and packaging are illustrative.
-- No contact messages are transmitted or stored.
+Product photos originate from
+https://saponineco.com/. Five products are documented in products.js; the first
+three are featured in concepts 01 and 02. No invented package designs or invented
+product names are displayed. Photography is animated with CSS perspective and
+scroll transforms; it is not a claimed 360-degree scan of the real product.
 
-Files: index.html, style.css, scene.js, app.js and assets/.
-Render Static Site: build command `true`, publish path `motion`.
-This folder is a standalone HTML demo, not an installable WordPress theme.
+Exact source URLs, retrieval date and SHA-256 hashes are retained in
+assets/official-photo-sources.json. The product cutouts are background-removal edits of these official photos.
+Original downloads are retained alongside them for comparison.
+The company-equipment photo is also sourced from the official home page.
 
-Validation: JavaScript syntax and local asset/anchor checks passed. Desktop and a 384-pixel responsive iframe were inspected in the available browser; the Canvas 2D geometry renderer was exercised because WebGL was unavailable there. Native WebGL rendering and performance on physical phones were not benchmarked. Product dialogs, palette selection, mobile menu and contact request preparation were checked.
+Serve this directory with any static HTTP server. Render build command: true.
+This is an HTML demo, not an installable WordPress theme.
+
+Transparent cutouts were made with the built-in image editor. See
+assets/official-photo-sources.json and IMAGE-EDIT-PROMPTS.md in the repository
+root. WebP encoding is lossless and alpha transparency is retained.

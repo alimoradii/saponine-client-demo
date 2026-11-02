@@ -1,23 +1,21 @@
-# Saponine — Reference-led concept 03
+# Saponine — reference
 
-Independent Persian RTL static website with supplied IRANSans regular/bold fonts.
-Seven full-screen desktop sections, floating header, five collection slides,
-collection dock, side section navigation, feature display, catalog carousel,
-search, mobile navigation, dialogs and reduced-motion support.
+Persian RTL static website with supplied IRANSans webfonts.
 
-Visual direction follows the page structure and proportions of adriansalamat.com.
-Saponine logo and owned concept imagery are used. Reference product photographs,
-logos and marketing claims are not included. Collection names and packaging are
-illustrative; contact details await approval. This is an HTML demo, not an
-installable WordPress theme.
+Product photos originate from
+https://saponineco.com/. Five products are documented in products.js; the first
+three are featured in concepts 01 and 02. No invented package designs or invented
+product names are displayed. Photography is animated with CSS perspective and
+scroll transforms; it is not a claimed 360-degree scan of the real product.
 
-3D product scenes use WebGL with a Canvas geometry fallback. The renderer is
-adapted from concept 02 for centered feature presentation and catalog display.
+Exact source URLs, retrieval date and SHA-256 hashes are retained in
+assets/official-photo-sources.json. The product cutouts are background-removal edits of these official photos.
+Original downloads are retained alongside them for comparison.
+The company-equipment photo is also sourced from the official home page.
 
-Render Static Site: build command `true`, publish directory `reference`.
+Serve this directory with any static HTTP server. Render build command: true.
+This is an HTML demo, not an installable WordPress theme.
 
-Validation: JavaScript syntax checks; local desktop and 390px-frame mobile
-review; collection search, catalog switching, product dialog and mobile
-navigation exercised. IRANSans loaded and no horizontal overflow observed.
-The current browser uses the Canvas geometry fallback; native GPU WebGL
-rendering and device performance have not been independently benchmarked.
+Transparent cutouts were made with the built-in image editor. See
+assets/official-photo-sources.json and IMAGE-EDIT-PROMPTS.md in the repository
+root. WebP encoding is lossless and alpha transparency is retained.

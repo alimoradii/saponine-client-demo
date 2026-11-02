@@ -1,0 +1,130 @@
+{
+  "retrieved_at": "2026-11-02",
+  "source_site": "https://saponineco.com/",
+  "images": [
+    {
+      "slug": "sapo-zinc",
+      "page": "https://saponineco.com/portfolio-item/sapo-zinc-pyrithione-2-shampoo/",
+      "url": "https://saponineco.com/wp-content/uploads/2021/05/ساپو-زینک-2-ساپونین.jpg",
+      "alt": "شامپو ساپو-زينک پيريتيون 2%",
+      "file": "official-sapo-zinc.jpg",
+      "sha256": "f97535d07a2734173af8bf4cdad089bac888a8b7916783ba358e1705dd6754a9",
+      "bytes": 157943,
+      "dimensions": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "slug": "bibacter",
+      "page": "https://saponineco.com/portfolio-item/bibacter-gel-70/",
+      "url": "https://saponineco.com/wp-content/uploads/2021/05/ژل-بیو-باکتر-ساپونین.jpg",
+      "alt": "ژل بی باکتر 70%",
+      "file": "official-bibacter.jpg",
+      "sha256": "15f0ec4ea8f7b277dac2ed805921fb9ea3a9b65694aadc80b8e0ceee0af2f19b",
+      "bytes": 141896,
+      "dimensions": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "slug": "permethrin",
+      "page": "https://saponineco.com/portfolio-item/permethrin-shampoo-1/",
+      "url": "https://saponineco.com/wp-content/uploads/2021/05/شامپو-پرمترین-1-ساپونین.jpg",
+      "alt": "شامپو پرمترین 1%",
+      "file": "official-permethrin.jpg",
+      "sha256": "bc1f1166b791aa627cd88bca6f2f69d6001d6e0609074804d912965957cd44ee",
+      "bytes": 173482,
+      "dimensions": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "slug": "povidone",
+      "page": "https://saponineco.com/portfolio-item/povidone-iodine-10-topical-solution/",
+      "url": "https://saponineco.com/wp-content/uploads/2021/05/بتادین-پوودون-آیدان-10-ساپونین.jpg",
+      "alt": "محلول پوویدون آیوداین 10%",
+      "file": "official-povidone.jpg",
+      "sha256": "97427b6bdedd8c6d34e488303bc224ed2524bcff9a9779aedcd59ed042568783",
+      "bytes": 142305,
+      "dimensions": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "slug": "company",
+      "page": "https://saponineco.com/",
+      "url": "https://saponineco.com/wp-content/uploads/2021/06/درباره-ما-ساپونین.jpg",
+      "file": "official-company.jpg",
+      "sha256": "71f278d55d36c0e3cc191954757282e72431ac6273aa1a267523fd60e6088f5c",
+      "bytes": 61546,
+      "dimensions": [
+        440,
+        586
+      ]
+    },
+    {
+      "slug": "vitamin-b1",
+      "page": "https://saponineco.com/portfolio-item/vitamin-b1-300-mg-tablet/",
+      "url": "https://saponineco.com/wp-content/uploads/2021/05/ویتامین-ب-1-300-ساپونین.jpg",
+      "file": "official-vitamin-b1.jpg",
+      "bytes": 188766,
+      "dimensions": [
+        1920,
+        1280
+      ],
+      "sha256": "cd3f8a096457514dcccdc891d357d96a6a143f230a13fc3933ae5d8a6da62505"
+    }
+  ],
+  "image_processing": "Product backgrounds removed with the built-in image editor using the downloaded official photographs as edit targets. Lossless WebP encoding preserves the editor output RGBA pixels. Original downloads are retained separately for provenance.",
+  "cutouts": [
+    {
+      "product_slug": "sapo-zinc",
+      "file": "product-sapo-zinc-cutout.webp",
+      "source_file": "official-sapo-zinc.jpg",
+      "sha256": "27cb4fef9619218576dc428ce2be3f3ec9eb37ab6d9bcabd2faaa94b179b6f5d",
+      "operation": "background-extraction",
+      "alpha": true,
+      "encoding": "lossless WebP"
+    },
+    {
+      "product_slug": "bibacter",
+      "file": "product-bibacter-cutout.webp",
+      "source_file": "official-bibacter.jpg",
+      "sha256": "b8ce258d056bba4e322a606cc2248ae5c14cc8dff98c15dfb81f85954304ff39",
+      "operation": "background-extraction",
+      "alpha": true,
+      "encoding": "lossless WebP"
+    },
+    {
+      "product_slug": "povidone",
+      "file": "product-povidone-cutout.webp",
+      "source_file": "official-povidone.jpg",
+      "sha256": "cf1433bc5b6d4b9efabbf4aaab21701cb247560e403aa603720d3eecad374e1b",
+      "operation": "background-extraction",
+      "alpha": true,
+      "encoding": "lossless WebP"
+    },
+    {
+      "product_slug": "permethrin",
+      "file": "product-permethrin-cutout.webp",
+      "source_file": "official-permethrin.jpg",
+      "sha256": "3a07eecdc9279c7843d9e86ee9750361f3b7201b7cc39a2199dcee8193fe088c",
+      "operation": "background-extraction",
+      "alpha": true,
+      "encoding": "lossless WebP"
+    },
+    {
+      "product_slug": "vitamin-b1",
+      "file": "product-vitamin-b1-cutout.webp",
+      "source_file": "official-vitamin-b1.jpg",
+      "sha256": "51a6dcd382051a48b1fe92260f0fe907e2ab8e68eea4815b2a2633eb7009d295",
+      "operation": "background-extraction",
+      "alpha": true,
+      "encoding": "lossless WebP"
+    }
+  ]
+}
