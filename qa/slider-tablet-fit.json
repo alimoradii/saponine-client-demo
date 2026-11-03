@@ -1,0 +1,317 @@
+[
+  {
+    "demo": "source",
+    "slide": 0,
+    "photos": [
+      {
+        "box": [
+          294.828125,
+          400.3125
+        ],
+        "mode": "cover",
+        "slug": "sapo-zinc",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "source",
+    "slide": 1,
+    "photos": [
+      {
+        "box": [
+          294.828125,
+          400.3125
+        ],
+        "mode": "cover",
+        "slug": "bibacter",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "source",
+    "slide": 2,
+    "photos": [
+      {
+        "box": [
+          294.828125,
+          400.3125
+        ],
+        "mode": "cover",
+        "slug": "povidone",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "source",
+    "slide": 3,
+    "photos": [
+      {
+        "box": [
+          294.828125,
+          400.3125
+        ],
+        "mode": "cover",
+        "slug": "permethrin",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "source",
+    "slide": 4,
+    "photos": [
+      {
+        "box": [
+          294.828125,
+          400.3125
+        ],
+        "mode": "contain",
+        "slug": "vitamin-b1",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "motion",
+    "slide": 0,
+    "photos": [
+      {
+        "box": [
+          376.734375,
+          517.078125
+        ],
+        "mode": "cover",
+        "slug": "sapo-zinc",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "motion",
+    "slide": 1,
+    "photos": [
+      {
+        "box": [
+          376.734375,
+          517.078125
+        ],
+        "mode": "cover",
+        "slug": "bibacter",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "motion",
+    "slide": 2,
+    "photos": [
+      {
+        "box": [
+          376.734375,
+          517.078125
+        ],
+        "mode": "cover",
+        "slug": "povidone",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "motion",
+    "slide": 3,
+    "photos": [
+      {
+        "box": [
+          376.734375,
+          517.078125
+        ],
+        "mode": "cover",
+        "slug": "permethrin",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "motion",
+    "slide": 4,
+    "photos": [
+      {
+        "box": [
+          376.734375,
+          517.078125
+        ],
+        "mode": "contain",
+        "slug": "vitamin-b1",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "reference",
+    "slide": 0,
+    "photos": [
+      {
+        "box": [
+          181.984375,
+          256.359375
+        ],
+        "mode": "cover",
+        "slug": "bibacter",
+        "visible": true
+      },
+      {
+        "box": [
+          314.328125,
+          435.34375
+        ],
+        "mode": "cover",
+        "slug": "sapo-zinc",
+        "visible": true
+      },
+      {
+        "box": [
+          181.984375,
+          256.359375
+        ],
+        "mode": "cover",
+        "slug": "permethrin",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "reference",
+    "slide": 1,
+    "photos": [
+      {
+        "box": [
+          181.984375,
+          256.359375
+        ],
+        "mode": "contain",
+        "slug": "vitamin-b1",
+        "visible": true
+      },
+      {
+        "box": [
+          314.328125,
+          435.34375
+        ],
+        "mode": "cover",
+        "slug": "bibacter",
+        "visible": true
+      },
+      {
+        "box": [
+          181.984375,
+          256.359375
+        ],
+        "mode": "cover",
+        "slug": "sapo-zinc",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "reference",
+    "slide": 2,
+    "photos": [
+      {
+        "box": [
+          181.984375,
+          256.359375
+        ],
+        "mode": "cover",
+        "slug": "permethrin",
+        "visible": true
+      },
+      {
+        "box": [
+          314.328125,
+          435.34375
+        ],
+        "mode": "cover",
+        "slug": "povidone",
+        "visible": true
+      },
+      {
+        "box": [
+          181.984375,
+          256.359375
+        ],
+        "mode": "contain",
+        "slug": "vitamin-b1",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "reference",
+    "slide": 3,
+    "photos": [
+      {
+        "box": [
+          181.984375,
+          256.359375
+        ],
+        "mode": "cover",
+        "slug": "sapo-zinc",
+        "visible": true
+      },
+      {
+        "box": [
+          314.328125,
+          435.34375
+        ],
+        "mode": "cover",
+        "slug": "permethrin",
+        "visible": true
+      },
+      {
+        "box": [
+          181.984375,
+          256.359375
+        ],
+        "mode": "cover",
+        "slug": "povidone",
+        "visible": true
+      }
+    ]
+  },
+  {
+    "demo": "reference",
+    "slide": 4,
+    "photos": [
+      {
+        "box": [
+          181.984375,
+          256.359375
+        ],
+        "mode": "cover",
+        "slug": "povidone",
+        "visible": true
+      },
+      {
+        "box": [
+          314.328125,
+          435.34375
+        ],
+        "mode": "contain",
+        "slug": "vitamin-b1",
+        "visible": true
+      },
+      {
+        "box": [
+          181.984375,
+          256.359375
+        ],
+        "mode": "cover",
+        "slug": "bibacter",
+        "visible": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "demo": "source",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "0"
+  },
+  {
+    "demo": "source",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "1"
+  },
+  {
+    "demo": "source",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "2"
+  },
+  {
+    "demo": "source",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "3"
+  },
+  {
+    "demo": "source",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "4"
+  },
+  {
+    "demo": "motion",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "0"
+  },
+  {
+    "demo": "motion",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "1"
+  },
+  {
+    "demo": "motion",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "2"
+  },
+  {
+    "demo": "motion",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "3"
+  },
+  {
+    "demo": "motion",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "4"
+  },
+  {
+    "demo": "reference",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "0"
+  },
+  {
+    "demo": "reference",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "1"
+  },
+  {
+    "demo": "reference",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "2"
+  },
+  {
+    "demo": "reference",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "3"
+  },
+  {
+    "demo": "reference",
+    "activeImageLoaded": true,
+    "copyHeight": 300.1875,
+    "copyToPhotoGap": 10.203125,
+    "overflow": false,
+    "slide": "4"
+  }
+]

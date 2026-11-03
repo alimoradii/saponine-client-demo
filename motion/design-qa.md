@@ -1,80 +1,60 @@
-# Design QA · Saponine professional demos
+# Opening slider QA · 2026-11-03
 
 final result: passed
 
-Reviewed: 2026-11-02. Scope: the three runnable web demos. The later user-supplied logo and corporate palette intentionally supersede the original green identity in the selected concept images.
+Scope: add a five-slide photographic opening carousel to the three existing Saponine demos, inspired by the live Adrian Salamat opening slider. The requested Saponine identity, actual IRANSans, official product cutouts, lower page sections and three distinct light/dark/gallery directions remain the baseline. This is a requested component adaptation, not a pixel-for-pixel copy of Adrian's advertising artwork or logos.
 
-## Visual truth and rendered evidence
+New browser screenshots and visual comparisons are local QA evidence and are excluded from this public source update. Evidence paths below refer to the verified local checkout. Public machine-readable check results remain in qa/.
 
-| Demo | Selected visual truth | Browser-rendered evidence | Comparison |
-| --- | --- | --- | --- |
-| source | /workspace/scratch/ea4fed638cd0/generated_images/exec-3744528b-a73e-4483-8c93-acfe644ba52d.png | qa/source-final-desktop.webp | qa/source-final-comparison.jpg |
-| motion | /workspace/scratch/ea4fed638cd0/generated_images/exec-31539a34-4c24-4ffe-877b-031f8c01670b.png | qa/motion-final-desktop.webp | qa/motion-final-comparison.jpg |
-| reference | /workspace/scratch/ea4fed638cd0/generated_images/exec-3a5bbe45-ab7f-4a26-b4b5-6aa428527f51.png | qa/reference-final-desktop.webp | qa/reference-final-comparison.jpg |
+## Source and comparison evidence
 
-Source concepts are 1487×1058 pixels. Desktop web content was rendered at 1487×1058 CSS pixels, devicePixelRatio 1, in the cloud browser. A QA iframe was displayed at scale 0.85 inside the 1363×936 browser viewport; comparison crops are 1263×899 pixels. Source images were normalized to the same size before full-view and focused comparison. No browser chrome or surrounding QA canvas is part of the compared UI.
+Source visual truth: https://adriansalamat.com/ and qa/slider-adrian-reference.webp. The source hero was opened, its five-slide navigation and image changes inspected, and the screenshot captured before implementation.
 
-Responsive QA: 390×844 CSS pixels at scale 1; 834×1194 CSS pixels at scale 0.73. Browser screenshots and DOM measurements confirmed the intended viewport, loaded IRANSans and zero document-level horizontal overflow for all nine demo/viewport combinations. This tests responsive layout in Chromium, not physical mobile devices or Safari.
+Rendered implementation: qa/slider-source-desktop.webp, qa/slider-motion-desktop.webp, qa/slider-reference-desktop.webp. Full equal-viewport pairs: qa/slider-source-comparison.jpg, qa/slider-motion-comparison.jpg, qa/slider-reference-comparison.jpg. Combined full-view input: qa/slider-full-comparison.jpg. Focused header, typography and control comparison: qa/slider-focused-comparison.jpg. Both source and implementation were opened and viewed together in these comparison inputs.
 
-Default states: Sapo-Zinc selected in source and reference; Bibacter selected in motion; no dialog open. Ready-state captures wait for the product dock and font readiness.
+Desktop source and implementation: 1363×936 pixels/CSS viewport, devicePixelRatio 1. The app content width excludes Chromium's visible vertical scrollbar. Screenshots represent the hero at scrollY 0 with no modal, the first Sapo-Zinc slide in light/gallery and Bibacter in dark. Motion is paused for stable comparison; the normal user load has motion and autoplay enabled unless reduced motion is requested. Expected differences are Saponine's supplied logo/purple identity, Persian type/content, real Saponine packaging, real stock photography, and preservation of the three previously selected art directions. The light/gallery use a quiet copy column; the dark version is full-bleed photography.
 
-Focused evidence: qa/source-typography-focus.jpg and qa/motion-typography-focus.jpg. The original logo file was inspected directly and its unchanged bytes verified by SHA-256. Product labels and photo subjects were checked against the existing official cutouts, which were preserved unchanged.
+Responsive evidence: qa/slider-{source,motion,reference}-mobile.webp and qa/slider-{source,motion,reference}-tablet.webp. Mobile content viewport 390×844 CSS px, iframe scale 1, screenshot content crop 391×844 including the rounded pixel edge. Tablet 834×1194 CSS px, scale .73, normalized visible crop 610×872 pixels. All three demos passed with local fonts loaded and no document-level horizontal overflow. Tests use Chromium responsive frames, not physical iOS/Android or Safari.
 
 ## Required fidelity surfaces
 
-- Fonts/typography: local IRANSans Regular and Bold loaded in all three demos. Persian RTL, headings, wrapping, button labels, body sizes and keyboard focus were inspected. Arial is used only for the optional Latin watermark and metadata. Runtime typography intentionally uses the actual supplied font rather than approximating the image-generation lettering.
-- Spacing/layout: floating header, full-bleed scene, product/copy hierarchy, compact floating product selector, section rail and scroll cue retained. Gallery CTA, product captions and dock have separate space. Portrait tablet photo widths were adjusted to keep the actual package visible.
-- Colors/tokens: official supplied logo, charcoal #3c3c3a, purple #7d4697, blush #e5afd1, paper #fcf9fc and deep plum #2d2136. This is the explicit later user override. Checked contrast pairs: charcoal/paper 10.58:1; white/purple 6.57:1; body/paper 5.41:1; partner copy/surface 4.71:1; ivory/plum 14.64:1. Mobile motion background uses the quiet dark side of the scene behind text.
-- Images/assets: real official product cutouts and original supplied logo; transparent product backgrounds; generated scene backgrounds are separate image assets. Product labels and packaging colors were not changed for the new corporate palette. Feather icons are official SVG assets with the MIT license retained. No CSS art or fabricated product packages are used in active pages.
-- Copy/content: real product names, package forms and official source links retained. No invented certification, clinical claim, award or sales statistic. The cooperation form visibly prepares text without sending or storing information.
+- Fonts and typography: original local IRANSans Regular/Bold preserved and loaded. Persian RTL headings, consistent two-line wrapping, readable CTA/counter, and Latin product metadata checked. All five slide copies fit before the mobile photograph; minimum measured gap is positive. Type is actual editable HTML, not a flattened banner.
+- Spacing/layout rhythm: floating brand header, full-height opening scene, product focus, product dock and section navigation retained. New controls are separate from the global motion switch. Tablet package planes fit the actual opaque packaging bounds and leave the copy column clear. Mobile gallery edge peeks are deliberate carousel cues.
+- Colors/tokens: supplied purple #7d4697, blush #e5afd1 and charcoal #3c3c3a retained. Dark photographic veil gives ivory text a quiet background. Mobile count/pagination have dark contrast backplates; focus outlines and selected indicators remain visible.
+- Images/assets: five real photographs (hair care, hand washing, microscope research, water, outdoor walking), optimized local WebP, with author/source credit and a source manifest. No generated product or stock-photo imagery was introduced. The existing official product cutouts, logo and fonts were not modified. Stock photos are not described as the company's staff/facilities. All five images decoded successfully in the browser. Product-plane fit checked against actual packaging alpha bounds on all five tablet selections, including landscape Vitamin B1.
+- Copy/content: each image, product selection, title, description, Latin name, indicator and product-detail dialog stay synchronized. No clinical, dosage, certification, award or sales claims were added. Existing official product links and demo-form notices remain intact.
 
-## Functional and accessibility checks
+## Functional verification
 
-- Desktop and mobile navigation, menu open/close by pointer and Enter, and section links.
-- Product category filters: shampoo produces two results; gel produces one.
-- Search for Bibacter, opening its product dialog, packaging tab and official product link; zero-result query has a readable empty state.
-- Gallery side-product selection and center-product details; mobile dock selection of Permethrin and matching dialog/source link.
-- Previous/next spotlight product controls and persistent selected states.
-- Cooperation form validation and preparation of a request using dummy data; no message sent or stored.
-- Motion toggle changes aria-pressed, visible control label and image transform state. Reduced-motion media query and root scrolling behavior are implemented.
-- Product-plane perspective responds to scroll/pointer; the motion demo has a sticky three-chapter sequence. These are photo planes, not claimed volumetric scans.
-- App-origin browser console errors: none. Browser-extension metadata logs were identified separately and are not site errors.
-- JavaScript syntax checks, unique HTML IDs, internal anchor targets, local asset references, original logo hash and unchanged product-photo bytes passed.
+- All five slide selectors in all three demos: exactly one current picture and indicator; correct product selection; manual interaction stops rotation.
+- Previous/next wrap from slide five to one and back; keyboard Home/End; arrow-key navigation on desktop and mobile viewport.
+- Product CTA opens the matching Vitamin B1 dialog after selecting the fifth slide; dialog close restores normal page interaction.
+- Product dock/gallery retain their existing product-selection handlers and synchronize the hero carousel.
+- Mobile horizontal drag advanced from Sapo-Zinc to Bibacter through the same gesture handler used for touch swipe; mobile next/keyboard and menu open/close passed. Native physical touch scrolling was not separately emulated.
+- Normal page load autoplay was observed advancing from index 0 to 4 while data-rotating remained true. Explicit reduction of motion, manual slide selection and header-home navigation were then checked in sequence: body motion paused, rotation paused, slide 0. A later read after more than one interval remained paused at slide 0.
+- Rotation suspends while the hero is out of view, the page is hidden or the mouse is over the carousel; code includes these guards and respect for prefers-reduced-motion. No browser-level reduced-motion setting or physical touch device was used in this run.
+- No app-origin console errors in the three demos. Chrome extension metadata errors were identified and excluded. Evidence: qa/slider-console.json.
+- Detailed browser state evidence: qa/slider-browser-checks.json, qa/slider-mobile-content.json, qa/slider-responsive.json and qa/slider-tablet-fit.json.
 
 ## Comparison and fix history
 
-1. P2: gallery CTA and central pack/caption competed for space. Adjusted gallery bounds to leave CTA clearance and keep labels above the dock. Re-captured and compared.
-2. P2: title/dock scale was too small relative to the selected hierarchy. Increased desktop heading size, widened the dock and improved action label sizes. Re-captured full and focused regions.
-3. P1: negative-depth side products lost pointer hits to their stage. Set stage pointer-events to none and product buttons to auto. Confirmed selecting Bibacter changes the active product and matching spotlight content.
-4. P1: tapping the mobile menu icon replaced the event target before the outside-click handler ran. Used the original composed event path and non-interactive decorative icons. Pointer and keyboard menu tests now pass; navigation closes the menu correctly.
-5. P2: the mobile motion scene placed a bright ribbon behind ivory copy. Cropped to the quiet dark side on mobile; re-captured the readable state.
-6. P2: portrait tablet photo containers clipped outer transparent/package bounds. Widened the source stage and gallery center item; inspected corrected tablet captures.
-7. A capture taken before font/dock readiness showed transient empty chrome. The final evidence uses explicit ready-state waits. Runtime labels and all five selectors were confirmed in the DOM and on screen.
+1. P2, initial 390×844 layout: global motion toggle overlapped the carousel previous control. Moved the global control below the header at the opposite edge, added pagination/count contrast backplates and wider dot targets. Re-captured all three mobile views and checked geometry: controlOverlap false, overflow false. The combined mobile view was opened and inspected.
+2. P2, initial portrait tablet: a tall narrow product plane cropped the Sapo-Zinc carton; the gallery side pack approached the text column. Tied plane height to viewport width, widened the center plane and moved the side planes inward. Re-captured the 834×1194 views; actual alpha-bound package fitting passed all five selections in all three demos. The revised gallery was opened and inspected with no text collision.
+3. Stable capture readiness: font/dock readiness and paused visual state were used; source/implementation viewport and scroll state were normalized. Screenshot focus/scroll transitions were allowed to settle before the final captures.
 
-8. P2: the landscape Vitamin B1 package needs a different crop from portrait bottles. Added contain fitting for its catalog card and gallery image so the full original package remains visible.
+No actionable P0/P1/P2 issue remains. The full-view and focused comparisons show the requested photographic slider behavior and the retained Saponine branding.
 
-No actionable P0/P1/P2 findings remain in the web demos.
+## Limits and follow-up polish
 
-## Figma companion
-
-https://www.figma.com/design/XoysqwWyrB460D6e7KmjFg
-
-Final screen nodes: 13:2, 13:61, 13:120. Each contains native text, separate photographs/logo, editable vector icons and a product-dock instance; no flattened full-UI raster is used. CSS-mask placeholders were replaced with Feather SVG vectors. Repeated-header rendering and RTL start-alignment capture issues were fixed and the resulting screenshots inspected.
-
-Font family metadata remains IRANSans. The current Figma tool session cannot load that local font for text editing; installing/making the font available in Figma is required for subsequent text changes. This does not affect the three websites, where the actual WOFF files load and render.
-
-## Follow-up polish and limits
-
-P3: small rendering differences from generated concept lettering; deliberate mobile carousel edge peeks; no physical-device/Safari run. Full clinical content and production form delivery remain outside these frontend demos.
+P3: mobile gallery side-product edge peeks are intentional; minor antialiasing differences from source advertising artwork. Figma retains the previously selected design baseline; this slider update is implemented in the code/live demos. No backend, form delivery, site access change, model scan, or new route was added.
 
 ## Implementation checklist
 
-- [x] Three distinct selected layouts implemented.
-- [x] Supplied official logo and corporate colors applied to all three.
-- [x] Actual product photos and IRANSans preserved.
-- [x] Desktop/mobile/tablet layouts inspected.
-- [x] Primary interaction paths tested and observed defects fixed.
-- [x] Full-view and focused visual comparison completed.
-- [x] Browser console and static checks completed.
+- [x] Five real-photo slides in each existing demo.
+- [x] Product, text, photo, CTA and navigation synchronized.
+- [x] Automatic/manual playback and keyboard/drag interactions checked.
+- [x] Original logo, local IRANSans and official product cutouts preserved.
+- [x] Desktop/mobile/tablet comparison complete; P2 findings fixed and re-captured.
+- [x] No app-origin browser errors.
 
 final result: passed

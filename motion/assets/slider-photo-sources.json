@@ -1,0 +1,81 @@
+{
+  "retrieved": "2026-11-03",
+  "notes": "Real editorial stock photographs, not company employees or facilities; no AI image generation. Original product cutouts and packaging remain unchanged.",
+  "photos": [
+    {
+      "slug": "hair",
+      "page": "https://unsplash.com/photos/woman-holding-her-hair-I6K5ZSAfJDk",
+      "author": "Nyana Stoica",
+      "image": "https://images.unsplash.com/photo-1536063211352-0b94219f6212",
+      "local": "assets/slider-hair.webp",
+      "dimensions": [
+        933,
+        1400
+      ],
+      "bytes": 75756,
+      "license": "https://unsplash.com/license",
+      "type": "real stock photograph",
+      "ai_generated": false
+    },
+    {
+      "slug": "hands",
+      "page": "https://unsplash.com/photos/washing-hands-with-soap-muq_ej7p9s0",
+      "author": "Claudio Schwarz",
+      "image": "https://images.unsplash.com/photo-1584265549884-cb8ea486a613",
+      "local": "assets/slider-hands.webp",
+      "dimensions": [
+        1800,
+        1201
+      ],
+      "bytes": 59162,
+      "license": "https://unsplash.com/license",
+      "type": "real stock photograph",
+      "ai_generated": false
+    },
+    {
+      "slug": "laboratory",
+      "page": "https://unsplash.com/photos/a-woman-in-a-lab-looking-through-a-microscope-cK0hjNSgnS4",
+      "author": "NIAID",
+      "image": "https://images.unsplash.com/photo-1707944745900-ae9f750f2c69",
+      "local": "assets/slider-laboratory.webp",
+      "dimensions": [
+        1022,
+        1400
+      ],
+      "bytes": 126512,
+      "license": "https://unsplash.com/license",
+      "type": "real stock photograph",
+      "ai_generated": false
+    },
+    {
+      "slug": "water",
+      "page": "https://unsplash.com/photos/blue-swimming-pool-water-ripples-60wCqYf7Fg8",
+      "image": "https://images.unsplash.com/photo-1500673587002-1d2548cfba1b",
+      "author": "Lee Jeffs",
+      "local": "assets/slider-water.webp",
+      "dimensions": [
+        1800,
+        1200
+      ],
+      "bytes": 342808,
+      "license": "https://unsplash.com/license",
+      "type": "real stock photograph",
+      "ai_generated": false
+    },
+    {
+      "slug": "lifestyle",
+      "page": "https://unsplash.com/photos/couple-walking-outdoors-with-gym-bags-and-water-bottles-pxYDnXRPyQE",
+      "author": "Vitaly Gariev",
+      "image": "https://images.unsplash.com/photo-1758520705424-e31fc2a77239",
+      "local": "assets/slider-lifestyle.webp",
+      "dimensions": [
+        1800,
+        1013
+      ],
+      "bytes": 141860,
+      "license": "https://unsplash.com/license",
+      "type": "real stock photograph",
+      "ai_generated": false
+    }
+  ]
+}

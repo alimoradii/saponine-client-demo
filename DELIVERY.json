@@ -1,6 +1,6 @@
 {
-  "version": "professional-20261102",
-  "base_commit": "cda56425f0336ef1d852940e93df828b81cfca6b",
+  "version": "photographic-slider-20261103",
+  "base_commit": "ffad587f757e51e24cf988d267a369bcf15edcef",
   "repository": "https://github.com/alimoradii/saponine-client-demo",
   "figma": "https://www.figma.com/design/XoysqwWyrB460D6e7KmjFg",
   "demos": {
@@ -8,5 +8,19 @@
     "motion": "https://saponine-motion-demo.onrender.com/",
     "reference": "https://saponine-reference-demo.onrender.com/"
   },
-  "brand_logo_sha256": "2ef4c36f10735b2992956f18b47d12a85bb7293c8ad76e4537bc6711522c64fd"
+  "brand_logo_sha256": "2ef4c36f10735b2992956f18b47d12a85bb7293c8ad76e4537bc6711522c64fd",
+  "opening_slider": {
+    "slides": 5,
+    "interval_ms": 7000,
+    "real_photography": true,
+    "source_manifest": "assets/slider-photo-sources.json",
+    "controls": [
+      "previous",
+      "next",
+      "pagination",
+      "pause",
+      "keyboard",
+      "horizontal swipe"
+    ]
+  }
 }

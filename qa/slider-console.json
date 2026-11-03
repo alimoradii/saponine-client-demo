@@ -1,0 +1,17 @@
+[
+  {
+    "demo": "source",
+    "appErrors": [],
+    "excludedExtensionErrors": 137
+  },
+  {
+    "demo": "motion",
+    "appErrors": [],
+    "excludedExtensionErrors": 96
+  },
+  {
+    "demo": "reference",
+    "appErrors": [],
+    "excludedExtensionErrors": 100
+  }
+]
