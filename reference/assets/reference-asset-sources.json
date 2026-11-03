@@ -1,0 +1,98 @@
+{
+  "reference": "https://adriansalamat.com/",
+  "captured_on": "2026-11-03",
+  "license_note": "Publicly served reference assets adapted at the user request. No new license to proprietary reference assets is asserted; production reuse remains subject to their owners terms.",
+  "assets": [
+    {
+      "file": "feature-formula.svg",
+      "source": "https://adriansalamat.com/wp-content/uploads/2026/04/Mask-group.svg",
+      "origin": "Direct reference asset",
+      "sha256": "e99e05a7acfecd18c6ce0fc27e7c02b9072daf131801c60f051e724119fed1c4",
+      "adaptation": "Original geometry retained; color themed in CSS where applicable"
+    },
+    {
+      "file": "feature-care.svg",
+      "source": "https://adriansalamat.com/wp-content/uploads/2026/04/Mask-groupd.svg",
+      "origin": "Direct reference asset",
+      "sha256": "bc7c6df6f8c1d9e680872475c668372aea4c817aabcd79f50b12dd274c9644cc",
+      "adaptation": "Original geometry retained; color themed in CSS where applicable"
+    },
+    {
+      "file": "feature-quality.svg",
+      "source": "https://adriansalamat.com/wp-content/uploads/2026/04/Mask-groupq.svg",
+      "origin": "Direct reference asset",
+      "sha256": "5f40d330b2042d1a2875863a074a541ff625b14ffb3b650deff7baf666ccc39c",
+      "adaptation": "Original geometry retained; color themed in CSS where applicable"
+    },
+    {
+      "file": "feature-trust.svg",
+      "source": "https://adriansalamat.com/wp-content/uploads/2026/04/Mask-groupw.svg",
+      "origin": "Direct reference asset",
+      "sha256": "da24f8e012274d4fc53b6b9b96657de15e7d7710d6743524608c67e3013a442b",
+      "adaptation": "Original geometry retained; color themed in CSS where applicable"
+    },
+    {
+      "file": "Baskervville-Regular.woff2",
+      "source": "https://adriansalamat.com/wp-content/themes/websima/assets/fonts/Baskervville-Regular.woff2",
+      "origin": "Direct reference asset",
+      "sha256": "5f83ce81961ba95123c8dcb4ffa51703c1201fd267e10757e16d4d7a627b8647",
+      "adaptation": "Original geometry retained; color themed in CSS where applicable"
+    },
+    {
+      "file": "WebsimaIcon.woff",
+      "source": "https://adriansalamat.com/wp-content/themes/websima/assets/fonts/WebsimaIcon/fonts/WebsimaIcon.woff?rnfq3g",
+      "origin": "Direct reference asset",
+      "sha256": "6e7251a7dc4c84f971de726945026f1c9f0d3e5878b0a6c2b283eff2af4ed36e",
+      "adaptation": "Original geometry retained; color themed in CSS where applicable"
+    },
+    {
+      "file": "reference-next-background.svg",
+      "source": "https://adriansalamat.com/",
+      "origin": "Geometry or CSS extracted from reference page/theme",
+      "sha256": "895ea5f1f5aba5564292c9afe9666b34a767527d273aadb9f5468eaea65ef099",
+      "adaptation": "Original geometry retained; color themed in CSS where applicable"
+    },
+    {
+      "file": "reference-scroll-label.svg",
+      "source": "https://adriansalamat.com/",
+      "origin": "Geometry or CSS extracted from reference page/theme",
+      "sha256": "a9c952efbd6c24686c113590a852052f24793f9e2eab46ef2e435fc46764069f",
+      "adaptation": "Company label changed to Saponine; geometry retained"
+    },
+    {
+      "file": "reference-feature-ring.svg",
+      "source": "https://adriansalamat.com/",
+      "origin": "Geometry or CSS extracted from reference page/theme",
+      "sha256": "36bc66c4ef64a80f10de856736b8e09fd7655fc8abd2f0fb45369dca5488c281",
+      "adaptation": "Original geometry retained; color themed in CSS where applicable"
+    },
+    {
+      "file": "reference-product-ring.svg",
+      "source": "https://adriansalamat.com/",
+      "origin": "Geometry or CSS extracted from reference page/theme",
+      "sha256": "cfe22d2ad196fc7307459c0ccabd73ddef9bbcff8addf2d870e86b0a0e9afac3",
+      "adaptation": "Original geometry retained; color themed in CSS where applicable"
+    },
+    {
+      "file": "reference-product-next.svg",
+      "source": "https://adriansalamat.com/",
+      "origin": "Geometry or CSS extracted from reference page/theme",
+      "sha256": "c88bf5fc38f15ca7ebcbdba98e8e9779a23d9c2b340ef788e636e7dc849126ae",
+      "adaptation": "Original geometry retained; color themed in CSS where applicable"
+    },
+    {
+      "file": "reference-product-previous.svg",
+      "source": "https://adriansalamat.com/",
+      "origin": "Geometry or CSS extracted from reference page/theme",
+      "sha256": "db454eb82e964888e186429e711f17eff1f1192417a01882f40309bbd75f571a",
+      "adaptation": "Original geometry retained; color themed in CSS where applicable"
+    },
+    {
+      "file": "reference-decor.css",
+      "source": "https://adriansalamat.com/",
+      "origin": "Geometry or CSS extracted from reference page/theme",
+      "sha256": "dd65a289b624bed97b3d703b30a3fa3b7a70fc28a003c466418071cee37866ca",
+      "adaptation": "Class prefix and palette variables adapted"
+    }
+  ]
+}

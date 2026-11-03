@@ -1,0 +1,11 @@
+<svg class="next-slide-circle" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="   
+    M 100, 100
+    m -90, 0
+    a 90,90 0 1,0 180,0
+    a 90,90 0 1,0 -180,0" id="path-circle" fill="none"></path>
+                    <text style="font-family:Arial,sans-serif;font-size:14px;fill:#3c3c3a">
+                        <textPath href="#path-circle">
+                            SAPONINE PHARMACEUTICAL COMPANY • SAPONINE PHARMACEUTICAL COMPANY •</textPath>
+                    </text>
+                </svg>

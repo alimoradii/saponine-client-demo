@@ -1,6 +1,6 @@
 {
-  "version": "photographic-slider-20261103",
-  "base_commit": "ffad587f757e51e24cf988d267a369bcf15edcef",
+  "version": "adrian-structure-20261103",
+  "base_commit": "30f6dee0fcc90c4b4edf6076848c7dcc851f9329",
   "repository": "https://github.com/alimoradii/saponine-client-demo",
   "figma": "https://www.figma.com/design/XoysqwWyrB460D6e7KmjFg",
   "demos": {
@@ -15,12 +15,14 @@
     "real_photography": true,
     "source_manifest": "assets/slider-photo-sources.json",
     "controls": [
-      "previous",
-      "next",
       "pagination",
-      "pause",
-      "keyboard",
+      "play/pause",
+      "keyboard arrows",
       "horizontal swipe"
     ]
-  }
+  },
+  "layout": "One shared Adrian structure across all three folders",
+  "sections": 7,
+  "builder": "build-exact.py",
+  "figma_updated": false
 }

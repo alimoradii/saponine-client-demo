@@ -1,0 +1,96 @@
+/* Reference circle geometry; only brand colors are substituted. */
+.reference-circles {
+  transform-origin: top left;
+  position: absolute;
+  left: 0;
+  width: min(43vw, 33rem);
+  height: min(47vw, 38rem);
+  top: min(5rem, 3vw);
+  z-index: -1;
+  mask-image: linear-gradient(
+    180deg,
+    #00000000 0%,
+    black 16%,
+    black 65%,
+    #00000000 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #00000000 0%,
+    black 16%,
+    black 65%,
+    #00000000 100%
+  );
+  &.right {
+    right: 0;
+    bottom: -1rem;
+    top: auto;
+    left: auto;
+    transform-origin: bottom right;
+    .inner {
+      position: absolute;
+      inset: 0;
+      transform: scale(-1);
+    }
+  }
+  & .circle-w {
+    position: absolute;
+    aspect-ratio: 1 / 1;
+    & .circle {
+      border-color: var(--c);
+      border-style: solid;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      display: block;
+      border-width: min(7.5rem, 5vw);
+      border-top-color: transparent !important;
+      border-left-color: transparent !important;
+    }
+  }
+  .circle-w1 {
+    width: 80%;
+    top: -23%;
+    left: 20%;
+    /* animation: rorateCircle 15s linear infinite; */
+    .circle {
+      transform: rotate(65deg);
+    }
+  }
+  .circle-w2 {
+    width: 66%;
+    top: -32%;
+    left: -22%;
+    /* animation: rorateCircle 15s 5s linear infinite; */
+    .circle {
+      border-width: min(5.5rem, 5vw);
+      transform: rotate(42deg);
+    }
+  }
+  .circle-w3 {
+    width: 80%;
+    top: 28%;
+    left: -50%;
+    /* animation: rorateCircle 15s linear infinite; */
+    .circle {
+      transform: rotate(-53deg);
+    }
+  }
+  .circle-w4 {
+    width: 100%;
+    top: 63%;
+    left: -50%;
+    /* animation: rorateCircle2 15s linear infinite; */
+    .circle {
+      transform: rotate(-50deg);
+    }
+  }
+}
+.reference-circles.right .circle {
+  border-color: var(--c2);
+}
+@media (width>=1400px) {
+  .reference-circles {
+    width: min(38vw, 53rem);
+    height: min(42vw, 58rem);
+  }
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "kind": "orbit",
+    "mainScroll": 0,
+    "name": "ژل بی‌باکتر ۷۰٪",
+    "product": "bibacter",
+    "selected": 1
+  },
+  {
+    "kind": "orbit",
+    "mainScroll": 0,
+    "name": "محلول پوویدون آیوداین ۱۰٪",
+    "product": "povidone",
+    "selected": 1
+  },
+  {
+    "kind": "orbit",
+    "mainScroll": 0,
+    "name": "شامپو پرمترین ۱٪",
+    "product": "permethrin",
+    "selected": 1
+  },
+  {
+    "kind": "orbit",
+    "mainScroll": 0,
+    "name": "قرص ویتامین ب۱ ۳۰۰ میلی‌گرم",
+    "product": "vitamin-b1",
+    "selected": 1
+  },
+  {
+    "kind": "orbit",
+    "mainScroll": 0,
+    "name": "شامپو ساپو‌زینک ۲٪",
+    "product": "sapo-zinc",
+    "selected": 1
+  },
+  {
+    "kind": "search",
+    "results": [
+      "شامپو ساپو‌زینک ۲٪"
+    ]
+  },
+  {
+    "kind": "search-empty",
+    "text": "نتیجه‌ای یافت نشد. نام دیگری را جستجو کنید."
+  },
+  {
+    "kind": "filter-shampoo",
+    "results": [
+      "شامپو ساپو‌زینک ۲٪",
+      "شامپو پرمترین ۱٪"
+    ]
+  },
+  {
+    "forms": 0,
+    "kind": "request-draft",
+    "prepared": true,
+    "text": "مدیریت محترم شرکت ساپونین ایران\nبا سلام و احترام،\nاینجانب آزمون نمایش، در خصوص پیشنهاد همکاری به استحضار می‌رسانم:\nاین یک متن آزمایشی برای بررسی آماده‌سازی درخواست است.\nبا سپاس"
+  },
+  {
+    "active": "0",
+    "kind": "slide",
+    "photo": 933,
+    "selected": 1,
+    "title": "شامپو ساپو‌زینک ۲٪"
+  },
+  {
+    "active": "1",
+    "kind": "slide",
+    "photo": 1800,
+    "selected": 1,
+    "title": "ژل بی‌باکتر ۷۰٪"
+  },
+  {
+    "active": "2",
+    "kind": "slide",
+    "photo": 1022,
+    "selected": 1,
+    "title": "محلول پوویدون آیوداین ۱۰٪"
+  },
+  {
+    "active": "3",
+    "kind": "slide",
+    "photo": 1800,
+    "selected": 1,
+    "title": "شامپو پرمترین ۱٪"
+  },
+  {
+    "active": "4",
+    "kind": "slide",
+    "photo": 1800,
+    "selected": 1,
+    "title": "قرص ویتامین ب۱ ۳۰۰ میلی‌گرم"
+  },
+  {
+    "autoplay": "true",
+    "kind": "play",
+    "label": "توقف پخش خودکار"
+  },
+  {
+    "autoplay": "false",
+    "kind": "pause"
+  },
+  {
+    "expanded": "true",
+    "kind": "mobile-menu",
+    "open": true
+  },
+  {
+    "kind": "pharmacy",
+    "title": "ارتباط با واحد فروش",
+    "phone": "tel:+982186030094"
+  },
+  {
+    "kind": "faq",
+    "open": true,
+    "text": "در بخش محصولات، گزینه جزئیات محصول را باز کنید. لینک صفحه رسمی همان محصول در دسترس است."
+  },
+  {
+    "active": "home",
+    "kind": "keyboard-home",
+    "mainScroll": 0
+  },
+  {
+    "active": "features",
+    "kind": "wheel",
+    "mainScroll": 0
+  },
+  {
+    "dpr": 1,
+    "font": true,
+    "height": 936,
+    "icons": true,
+    "kind": "desktop-final",
+    "mainScroll": 0,
+    "overflow": false,
+    "reduce": false,
+    "slide": "0",
+    "width": 1363
+  },
+  {
+    "client": 375,
+    "closed": true,
+    "kind": "mobile-final",
+    "scroll": 375
+  },
+  {
+    "kind": "app-errors",
+    "count": 0,
+    "errors": []
+  }
+]
