@@ -9,7 +9,9 @@ const PORT = Number(process.env.PORT || 10000);
 const UPSTREAM = 'https://saponin-motion-showcase.lovable.app';
 const CSS = fs.readFileSync(path.join(__dirname, 'adrian.css'), 'utf8');
 const JS = fs.readFileSync(path.join(__dirname, 'adrian.js'), 'utf8');
-const VERSION = '2026-11-10-2';
+const CLEANUP_CSS = fs.readFileSync(path.join(__dirname, 'brand-cleanup.css'), 'utf8');
+const CLEANUP_JS = fs.readFileSync(path.join(__dirname, 'brand-cleanup.js'), 'utf8');
+const VERSION = '2026-11-10-3';
 const HOP = new Set(['connection','keep-alive','proxy-authenticate','proxy-authorization','te','trailer','transfer-encoding','upgrade']);
 
 function send(res, status, body, headers = {}) {
@@ -46,8 +48,8 @@ function copyHeaders(upstream, res, req) {
 
 function inject(html, origin) {
   let output = html.replaceAll(UPSTREAM, origin);
-  const head = `<meta name="saponine-render-mode" content="lovable-adrian-product"><link rel="stylesheet" href="/__adrian/adrian.css?v=${VERSION}">`;
-  const body = `<script src="/__adrian/adrian.js?v=${VERSION}" defer></script>`;
+  const head = `<meta name="saponine-render-mode" content="lovable-adrian-product"><link rel="stylesheet" href="/__adrian/brand-cleanup.css?v=${VERSION}"><link rel="stylesheet" href="/__adrian/adrian.css?v=${VERSION}">`;
+  const body = `<script src="/__adrian/brand-cleanup.js?v=${VERSION}"></script><script src="/__adrian/adrian.js?v=${VERSION}" defer></script>`;
   output = output.includes('</head>') ? output.replace('</head>', `${head}</head>`) : head + output;
   output = output.includes('</body>') ? output.replace('</body>', `${body}</body>`) : output + body;
   return output;
@@ -100,7 +102,9 @@ async function proxy(req, res) {
 }
 
 http.createServer((req, res) => {
-  if (req.url === '/__health') return send(res, 200, JSON.stringify({ ok: true, upstream: UPSTREAM, version: VERSION }), { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' });
+  if (req.url === '/__health') return send(res, 200, JSON.stringify({ ok: true, upstream: UPSTREAM, version: VERSION, lovableBadge: 'removed' }), { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' });
+  if ((req.url || '').startsWith('/__adrian/brand-cleanup.css')) return send(res, 200, CLEANUP_CSS, { 'content-type': 'text/css; charset=utf-8', 'cache-control': 'public, max-age=300' });
+  if ((req.url || '').startsWith('/__adrian/brand-cleanup.js')) return send(res, 200, CLEANUP_JS, { 'content-type': 'application/javascript; charset=utf-8', 'cache-control': 'public, max-age=300' });
   if ((req.url || '').startsWith('/__adrian/adrian.css')) return send(res, 200, CSS, { 'content-type': 'text/css; charset=utf-8', 'cache-control': 'public, max-age=300' });
   if ((req.url || '').startsWith('/__adrian/adrian.js')) return send(res, 200, JS, { 'content-type': 'application/javascript; charset=utf-8', 'cache-control': 'public, max-age=300' });
   if (!['GET','HEAD'].includes(req.method || 'GET')) return send(res, 405, 'Method Not Allowed', { allow: 'GET, HEAD', 'content-type': 'text/plain; charset=utf-8' });
