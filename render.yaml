@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: saponin-iran-access
+    runtime: static
+    plan: free
+    repo: https://github.com/alimoradii/saponine-client-demo
+    branch: iran-novpn-render
+    buildCommand: "true"
+    staticPublishPath: .
+    autoDeploy: true
+    domains:
+      - saponin.216.24.57.1.nip.io
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
