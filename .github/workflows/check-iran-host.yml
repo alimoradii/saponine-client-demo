@@ -12,60 +12,44 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Compare static hosts from Iranian network nodes
+      - name: Verify GitHubRaw delivery from Iran
         shell: bash
         run: |
           set -u
-          commit='2bb7531bdc5321434c88c354abc2aa146d52341b'
-          candidates=(
-            "statically|https://cdn.statically.io/gh/alimoradii/saponine-client-demo@${commit}/index.html"
-            "githubraw|https://cdn.githubraw.com/alimoradii/saponine-client-demo/${commit}/index.html"
-            "githubraw-dev|https://githubraw.com/alimoradii/saponine-client-demo/iran-static/index.html"
-            "htmlpreview|https://htmlpreview.github.io/?https://raw.githubusercontent.com/alimoradii/saponine-client-demo/iran-static/index.html"
-            "github-pages|https://alimoradii.github.io/saponine-client-demo/"
-          )
+          target='https://cdn.githubraw.com/alimoradii/saponine-client-demo/2bb7531bdc5321434c88c354abc2aa146d52341b/index.html'
 
-          check_from_iran() {
-            name="$1"
-            target="$2"
+          rm -f /tmp/body /tmp/headers
+          direct="$(curl -L --connect-timeout 15 --max-time 45 -sS -D /tmp/headers -o /tmp/body -w 'code=%{http_code} type=%{content_type}' "$target" || true)"
+          echo "DIRECT $direct"
+          grep -a -q 'saponine-host-mode' /tmp/body || { echo 'marker missing'; exit 1; }
+
+          dispatch=''
+          request_id=''
+          for dispatch_attempt in $(seq 1 5); do
             dispatch="$(curl -sS -G -H 'Accept: application/json' \
               --data-urlencode "host=$target" \
               --data-urlencode 'node=ir1.node.check-host.net' \
               --data-urlencode 'node=ir2.node.check-host.net' \
               --data-urlencode 'node=ir3.node.check-host.net' \
-              --data-urlencode 'node=ir4.node.check-host.net' \
-              --data-urlencode 'node=ir5.node.check-host.net' \
               --data-urlencode 'node=ir6.node.check-host.net' \
-              --data-urlencode 'node=ir7.node.check-host.net' \
-              --data-urlencode 'node=ir8.node.check-host.net' \
               'https://check-host.net/check-http' || true)"
-            request_id="$(echo "$dispatch" | jq -r '.request_id // empty' 2>/dev/null)"
-            if [ -z "$request_id" ]; then
-              echo "RESULT name=$name dispatch_failed=1"
-              return
-            fi
-
-            report='{}'
-            for attempt in $(seq 1 16); do
-              sleep 2
-              report="$(curl -sS -H 'Accept: application/json' "https://check-host.net/check-result/$request_id" || echo '{}')"
-              reported="$(echo "$report" | jq '[to_entries[] | select(.value != null)] | length' 2>/dev/null || echo 0)"
-              if [ "$reported" -ge 8 ]; then
-                break
-              fi
-            done
-            success="$(echo "$report" | jq '[to_entries[] | .value[]? | select((.[0] == 1) and ((.[3] | tostring) == "200"))] | length' 2>/dev/null || echo 0)"
-            echo "RESULT name=$name iran_http_200=$success report=https://check-host.net/check-report/$request_id"
-            echo "$report" | jq -c . || true
-          }
-
-          for candidate in "${candidates[@]}"; do
-            name="${candidate%%|*}"
-            url="${candidate#*|}"
-            rm -f /tmp/body /tmp/headers
-            direct="$(curl -L --connect-timeout 15 --max-time 45 -sS -D /tmp/headers -o /tmp/body -w 'code=%{http_code} type=%{content_type}' "$url" || true)"
-            marker=0
-            grep -a -q 'saponine-host-mode' /tmp/body 2>/dev/null && marker=1
-            echo "DIRECT name=$name $direct marker=$marker url=$url"
-            check_from_iran "$name" "$url"
+            request_id="$(printf '%s' "$dispatch" | jq -r '.request_id // empty' 2>/dev/null || true)"
+            [ -n "$request_id" ] && break
+            echo "dispatch attempt $dispatch_attempt failed: $dispatch"
+            sleep 5
           done
+          test -n "$request_id"
+          echo "IRAN_REPORT=https://check-host.net/check-report/$request_id"
+
+          report='{}'
+          for attempt in $(seq 1 20); do
+            sleep 2
+            report="$(curl -sS -H 'Accept: application/json' "https://check-host.net/check-result/$request_id" || echo '{}')"
+            reported="$(printf '%s' "$report" | jq '[to_entries[] | select(.value != null)] | length' 2>/dev/null || echo 0)"
+            echo "attempt=$attempt reported=$reported"
+            [ "$reported" -ge 4 ] && break
+          done
+          echo "$report" | jq . || true
+          success="$(printf '%s' "$report" | jq '[to_entries[] | .value[]? | select((.[0] == 1) and ((.[3] | tostring) == "200"))] | length' 2>/dev/null || echo 0)"
+          echo "IRAN_HTTP_200_NODES=$success"
+          test "$success" -ge 2
