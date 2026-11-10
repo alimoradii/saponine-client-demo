@@ -12,18 +12,21 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Check custom and fallback hosts
+      - name: Wait for valid custom-domain TLS
         shell: bash
         run: |
-          set -x
-          for url in \
-            https://saponin.216-24-57-1.sslip.io/ \
-            http://saponin.216-24-57-1.sslip.io/ \
-            https://saponin-iran-access-qqup.onrender.com/; do
-            echo "===== $url ====="
-            rm -f /tmp/headers.txt /tmp/body.html
-            curl -L --connect-timeout 15 --max-time 45 -sS -D /tmp/headers.txt -o /tmp/body.html -w 'code=%{http_code} type=%{content_type} remote=%{remote_ip} time=%{time_total}\n' "$url" || true
-            cat /tmp/headers.txt || true
-            grep -a -o 'saponine-host-mode[^>]*' /tmp/body.html | head -1 || true
-            wc -c /tmp/body.html || true
+          set -u
+          url='https://saponin.216-24-57-1.sslip.io/'
+          for attempt in $(seq 1 24); do
+            rm -f /tmp/body.html /tmp/headers.txt
+            code="$(curl -L --connect-timeout 15 --max-time 45 -sS -D /tmp/headers.txt -o /tmp/body.html -w '%{http_code}' "$url" || true)"
+            echo "attempt=$attempt code=$code"
+            if [ "$code" = "200" ] && grep -a -q 'saponine-host-mode' /tmp/body.html; then
+              echo "CUSTOM_DOMAIN_READY=$url"
+              cat /tmp/headers.txt
+              exit 0
+            fi
+            sleep 10
           done
+          echo 'Custom domain TLS was not ready during this verification window.'
+          exit 1
