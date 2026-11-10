@@ -1,0 +1,28 @@
+/* Remove the Lovable editor/remix badge from the client-facing Render site. */
+#lovable-badge,
+[data-lovable-badge],
+[data-testid*="lovable" i],
+[id*="lovable" i][id*="badge" i],
+[class*="lovable" i][class*="badge" i],
+a[href*="lovable.dev" i],
+a[href*="lovable.app" i][style*="position" i],
+iframe[src*="lovable" i],
+iframe[src*="gpteng" i],
+[aria-label*="Edit with Lovable" i],
+[title*="Edit with Lovable" i],
+[data-saponine-remove-lovable] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  transform: scale(0) !important;
+}
