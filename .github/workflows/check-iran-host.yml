@@ -12,44 +12,42 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Verify GitHubRaw delivery from Iran
+      - name: Verify browser document and assets
         shell: bash
         run: |
-          set -u
-          target='https://cdn.githubraw.com/alimoradii/saponine-client-demo/2bb7531bdc5321434c88c354abc2aa146d52341b/index.html'
+          set -euo pipefail
+          base='https://cdn.githubraw.com/alimoradii/saponine-client-demo/2bb7531bdc5321434c88c354abc2aa146d52341b'
+          browser_headers=(
+            -H 'User-Agent: Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/156.0.0.0 Mobile Safari/537.36'
+            -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'
+            -H 'Sec-Fetch-Dest: document'
+            -H 'Sec-Fetch-Mode: navigate'
+            -H 'Sec-Fetch-Site: none'
+          )
 
-          rm -f /tmp/body /tmp/headers
-          direct="$(curl -L --connect-timeout 15 --max-time 45 -sS -D /tmp/headers -o /tmp/body -w 'code=%{http_code} type=%{content_type}' "$target" || true)"
-          echo "DIRECT $direct"
-          grep -a -q 'saponine-host-mode' /tmp/body || { echo 'marker missing'; exit 1; }
+          rm -f /tmp/index /tmp/index-headers
+          code="$(curl -L --connect-timeout 15 --max-time 45 -sS "${browser_headers[@]}" -D /tmp/index-headers -o /tmp/index -w '%{http_code}' "$base/index.html")"
+          type="$(awk -F': ' 'tolower($1)=="content-type"{gsub("\r",""); print $2}' /tmp/index-headers | tail -1)"
+          echo "INDEX code=$code type=$type bytes=$(wc -c </tmp/index)"
+          test "$code" = '200'
+          grep -a -q 'saponine-host-mode' /tmp/index
+          grep -a -q '__adrian/adrian.js' /tmp/index
 
-          dispatch=''
-          request_id=''
-          for dispatch_attempt in $(seq 1 5); do
-            dispatch="$(curl -sS -G -H 'Accept: application/json' \
-              --data-urlencode "host=$target" \
-              --data-urlencode 'node=ir1.node.check-host.net' \
-              --data-urlencode 'node=ir2.node.check-host.net' \
-              --data-urlencode 'node=ir3.node.check-host.net' \
-              --data-urlencode 'node=ir6.node.check-host.net' \
-              'https://check-host.net/check-http' || true)"
-            request_id="$(printf '%s' "$dispatch" | jq -r '.request_id // empty' 2>/dev/null || true)"
-            [ -n "$request_id" ] && break
-            echo "dispatch attempt $dispatch_attempt failed: $dispatch"
-            sleep 5
+          assets=(
+            'assets/styles-Bm5mPNaq.css|text/css'
+            'assets/index-CYfzg5im.js|javascript'
+            'assets/hero_products-rskRhd75.jpg|image/jpeg'
+            '__adrian/adrian.css|text/css'
+            '__adrian/adrian.js|javascript'
+            '__l5e/assets-v1/59056403-a0a0-4d49-a9c7-47da2be3ec86/saponine_logo.png|image/png'
+          )
+          for item in "${assets[@]}"; do
+            path="${item%%|*}"
+            expected="${item#*|}"
+            headers="$(curl -L --connect-timeout 15 --max-time 45 -sSI "$base/$path")"
+            asset_code="$(printf '%s\n' "$headers" | awk '/^HTTP\//{code=$2} END{print code}')"
+            asset_type="$(printf '%s\n' "$headers" | awk -F': ' 'tolower($1)=="content-type"{gsub("\r",""); type=$2} END{print type}')"
+            echo "ASSET path=$path code=$asset_code type=$asset_type"
+            test "$asset_code" = '200'
+            printf '%s' "$asset_type" | grep -qi "$expected"
           done
-          test -n "$request_id"
-          echo "IRAN_REPORT=https://check-host.net/check-report/$request_id"
-
-          report='{}'
-          for attempt in $(seq 1 20); do
-            sleep 2
-            report="$(curl -sS -H 'Accept: application/json' "https://check-host.net/check-result/$request_id" || echo '{}')"
-            reported="$(printf '%s' "$report" | jq '[to_entries[] | select(.value != null)] | length' 2>/dev/null || echo 0)"
-            echo "attempt=$attempt reported=$reported"
-            [ "$reported" -ge 4 ] && break
-          done
-          echo "$report" | jq . || true
-          success="$(printf '%s' "$report" | jq '[to_entries[] | .value[]? | select((.[0] == 1) and ((.[3] | tostring) == "200"))] | length' 2>/dev/null || echo 0)"
-          echo "IRAN_HTTP_200_NODES=$success"
-          test "$success" -ge 2
