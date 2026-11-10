@@ -17,11 +17,13 @@ jobs:
         run: |
           set -x
           for url in \
-            https://saponin.216.24.57.1.nip.io/ \
+            https://saponin.216-24-57-1.sslip.io/ \
+            http://saponin.216-24-57-1.sslip.io/ \
             https://saponin-iran-access-qqup.onrender.com/; do
             echo "===== $url ====="
-            curl -k -L --connect-timeout 15 --max-time 45 -sS -D /tmp/headers.txt -o /tmp/body.html -w 'code=%{http_code} type=%{content_type} remote=%{remote_ip} time=%{time_total}\n' "$url" || true
+            rm -f /tmp/headers.txt /tmp/body.html
+            curl -L --connect-timeout 15 --max-time 45 -sS -D /tmp/headers.txt -o /tmp/body.html -w 'code=%{http_code} type=%{content_type} remote=%{remote_ip} time=%{time_total}\n' "$url" || true
             cat /tmp/headers.txt || true
-            grep -o 'saponine-host-mode[^>]*' /tmp/body.html | head -1 || true
+            grep -a -o 'saponine-host-mode[^>]*' /tmp/body.html | head -1 || true
             wc -c /tmp/body.html || true
           done
