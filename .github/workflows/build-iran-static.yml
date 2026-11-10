@@ -1,0 +1,85 @@
+name: Build Iran static mirror
+
+on:
+  push:
+    branches:
+      - iran-no-vpn
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: saponine-iran-static
+  cancel-in-progress: true
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+        with:
+          ref: iran-no-vpn
+          fetch-depth: 0
+
+      - name: Mirror the Lovable site
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/saponine-iran
+          mkdir -p /tmp/saponine-iran
+          wget \
+            --recursive \
+            --level=2 \
+            --page-requisites \
+            --convert-links \
+            --adjust-extension \
+            --no-parent \
+            --no-host-directories \
+            --execute robots=off \
+            --directory-prefix=/tmp/saponine-iran \
+            https://saponin-motion-showcase.lovable.app/
+          test -f /tmp/saponine-iran/index.html
+
+      - name: Add only the approved product animation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/saponine-iran/__adrian
+          cp render-proxy/adrian.css /tmp/saponine-iran/__adrian/adrian.css
+          cp render-proxy/adrian.js /tmp/saponine-iran/__adrian/adrian.js
+          python3 - <<'PY'
+          from pathlib import Path
+
+          root = Path('/tmp/saponine-iran')
+          index = root / 'index.html'
+          html = index.read_text(encoding='utf-8')
+          css = '<link rel="stylesheet" href="__adrian/adrian.css?v=2026-11-10-iran-static-1">'
+          js = '<script src="__adrian/adrian.js?v=2026-11-10-iran-static-1" defer></script>'
+          meta = '<meta name="saponine-host-mode" content="github-static-mirror">'
+          if '</head>' in html:
+              html = html.replace('</head>', meta + css + '</head>', 1)
+          else:
+              html = meta + css + html
+          if '</body>' in html:
+              html = html.replace('</body>', js + '</body>', 1)
+          else:
+              html += js
+          index.write_text(html, encoding='utf-8')
+          (root / '404.html').write_text(html, encoding='utf-8')
+          (root / '.nojekyll').write_text('', encoding='utf-8')
+          PY
+
+      - name: Publish mirror branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan iran-static-publish
+          git rm -rf . || true
+          cp -a /tmp/saponine-iran/. .
+          git add -A
+          git commit -m "Publish Iran-accessible Saponine mirror"
+          git push --force origin HEAD:iran-static
