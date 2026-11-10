@@ -8,7 +8,7 @@ services:
     staticPublishPath: .
     autoDeploy: true
     domains:
-      - saponin.216.24.57.1.nip.io
+      - saponin.216-24-57-1.sslip.io
     routes:
       - type: rewrite
         source: /*
