@@ -83,3 +83,26 @@ jobs:
           git add -A
           git commit -m "Publish Iran-accessible Saponine mirror"
           git push --force origin HEAD:iran-static
+
+      - name: Verify public mirror delivery
+        shell: bash
+        run: |
+          set -euo pipefail
+          urls=(
+            "https://raw.githack.com/alimoradii/saponine-client-demo/iran-static/index.html"
+            "https://cdn.jsdelivr.net/gh/alimoradii/saponine-client-demo@iran-static/index.html"
+          )
+          verified=0
+          for url in "${urls[@]}"; do
+            for attempt in 1 2 3 4; do
+              code="$(curl -L --max-time 30 -sS -o /tmp/public-index.html -w '%{http_code}' "$url" || true)"
+              type="$(curl -L --max-time 30 -sSI "$url" | tr -d '\r' | awk -F': ' 'tolower($1)=="content-type"{print $2}' | tail -1 || true)"
+              if [ "$code" = "200" ] && grep -q 'saponine-host-mode' /tmp/public-index.html; then
+                echo "verified $url ($code, ${type:-unknown})"
+                verified=1
+                break
+              fi
+              sleep 3
+            done
+          done
+          test "$verified" -eq 1
