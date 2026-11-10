@@ -1,0 +1,14 @@
+{
+  "name": "saponin-render-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Render reverse proxy for the Saponine Lovable showcase with a scoped Adrian-style product animation.",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check adrian.js"
+  }
+}
