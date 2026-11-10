@@ -1,0 +1,27 @@
+name: Check Iran host
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check custom and fallback hosts
+        shell: bash
+        run: |
+          set -x
+          for url in \
+            https://saponin.216.24.57.1.nip.io/ \
+            https://saponin-iran-access-qqup.onrender.com/; do
+            echo "===== $url ====="
+            curl -k -L --connect-timeout 15 --max-time 45 -sS -D /tmp/headers.txt -o /tmp/body.html -w 'code=%{http_code} type=%{content_type} remote=%{remote_ip} time=%{time_total}\n' "$url" || true
+            cat /tmp/headers.txt || true
+            grep -o 'saponine-host-mode[^>]*' /tmp/body.html | head -1 || true
+            wc -c /tmp/body.html || true
+          done
