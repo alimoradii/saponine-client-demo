@@ -1,0 +1,31 @@
+.sn-slider-admin { max-width: 1060px; }
+.sn-slider-picker { display: inline-block; margin: 10px 0 4px 1em; }
+.sn-slider-card { border: 1px solid #ded6e4; border-radius: 8px; margin: 0 0 12px; background: #fff; }
+.sn-slider-card summary { padding: 12px 16px; font-weight: 600; cursor: pointer; }
+.sn-slider-card summary:focus-visible { outline: 2px solid #7d4697; outline-offset: 1px; }
+.sn-slider-card [data-sn-title] { margin-inline-start: .8em; overflow-wrap: anywhere; }
+.sn-slider-card [data-sn-title]:empty { margin: 0; }
+.sn-slider-order, .sn-slider-grid { padding: 0 16px 14px; }
+.sn-slider-order { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.sn-slider-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px 22px; align-items: start; }
+.sn-slider-field { min-width: 0; }
+.sn-slider-field > label:first-child { display: block; margin-bottom: 4px; color: #3b3241; font-weight: 600; }
+.sn-slider-field input:not([type=checkbox]):not([type=color]), .sn-slider-field textarea, .sn-slider-field > select { box-sizing: border-box; width: 100%; max-width: 100%; }
+.sn-slider-field input[type=checkbox] { margin-top: 0; }
+.sn-slider-field [hidden] { display: none; }
+.sn-slider-media { display: grid; gap: 6px; }
+.sn-slider-media img { max-width: 140px; max-height: 74px; object-fit: contain; border-radius: 4px; }
+.sn-slider-media .button-link { margin-inline-start: 8px; }
+.sn-slider-inline, .sn-slider-measure { display: flex; align-items: center; gap: 6px; }
+.sn-slider-measure { direction: ltr; }
+.sn-slider-inline input[type=color] { flex: 0 0 36px; height: 31px; padding: 1px; }
+.sn-slider-save { margin-block: 14px 24px; }
+.sn-slider-related { border: 1px solid #ded6e4; padding: 12px 16px; border-radius: 8px; }
+.sn-slider-related summary { cursor: pointer; font-weight: 600; }
+.sn-slider-related fieldset { display: grid; grid-template-columns: 5em repeat(3,minmax(0,1fr)); align-items: start; gap: 10px; margin: 12px 0; padding-block: 8px; border-bottom: 1px solid #eee; }
+.sn-companion-field { display: inline-grid; max-width: 100%; gap: 4px; align-items: start; }
+.sn-companion-field label { display: grid; gap: 3px; font-size: 12px; }
+.sn-companion-field input { width: 100%; max-width: 100%; }
+.sn-companion-field .button-link { justify-self: start; }
+@media (max-width: 782px) { .sn-slider-related fieldset { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 640px) { .sn-slider-grid { grid-template-columns: 1fr; } }

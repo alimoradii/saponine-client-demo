@@ -95,17 +95,22 @@
               "unit": "svh",
               "sizes": []
             },
+            "hero_height_mobile": {
+              "size": 94,
+              "unit": "svh",
+              "sizes": []
+            },
             "min_height": {
               "size": 640,
               "unit": "px",
               "sizes": []
             },
             "min_height_mobile": {
-              "size": 720,
+              "size": 400,
               "unit": "px",
               "sizes": []
             },
-            "cover_position_mobile": "25% bottom",
+            "cover_position_mobile": "8% center",
             "wave_color": "var(--sn-bg)",
             "_title": "اسلایدها، تصاویر و موشن هدر"
           },

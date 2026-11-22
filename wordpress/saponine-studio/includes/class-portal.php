@@ -222,26 +222,33 @@ final class Portal {
 		require SAPONINE_STUDIO_PATH . 'templates/search-overlay.php';
 	}
 
-	public static function mobile_dock() {
-		if ( 'saponine-flex' !== get_template() || self::view() || ! is_front_page() || isset( $_GET['elementor-preview'] ) ) { return; }
-		$actions = array(
+	public static function dock_defaults() {
+		return array(
 			'products'   => array( __( 'محصولات', 'saponine-studio' ), self::url( 'products' ) ),
 			'brands'     => array( __( 'برندها', 'saponine-studio' ), '#sec-2' ),
 			'home'       => array( __( 'صفحه اصلی', 'saponine-studio' ), '#sec-0' ),
 			'search'     => array( __( 'جستجو', 'saponine-studio' ), '' ),
 			'pharmacies' => array( __( 'داروخانه‌ها', 'saponine-studio' ), self::url( 'pharmacies' ) ),
 		);
+	}
+
+	public static function mobile_dock() {
+		if ( 'saponine-flex' !== get_template() || self::view() || ! is_front_page() || isset( $_GET['elementor-preview'] ) ) { return; }
+		$actions = Slider_Companions::mobile_rows( get_queried_object_id() );
+		$actions = array_filter( $actions, static function ( $row ) { return empty( $row['hidden'] ); } );
+		if ( ! $actions ) { return; }
 		?>
-		<nav class="sn-mobile-dock" aria-label="<?php esc_attr_e( 'دسترسی سریع', 'saponine-studio' ); ?>">
+		<nav class="sn-mobile-dock" style="--sn-dock-columns:<?php echo count( $actions ); ?>" aria-label="<?php esc_attr_e( 'دسترسی سریع', 'saponine-studio' ); ?>">
 		<?php foreach ( $actions as $key => $action ) : ?>
-			<?php if ( 'search' === $key ) : ?>
+			<?php $search = 'search' === $key && '' === $action['url']; ?>
+			<?php if ( $search ) : ?>
 				<button type="button" data-sn-mobile-action="search" data-sn-search-open aria-haspopup="dialog" aria-controls="sn-finder">
 			<?php else : ?>
-				<a href="<?php echo esc_url( $action[1] ); ?>" data-sn-mobile-action="<?php echo esc_attr( $key ); ?>">
+				<a href="<?php echo esc_url( $action['url'] ); ?>" data-sn-mobile-action="<?php echo esc_attr( $key ); ?>">
 			<?php endif; ?>
-				<img alt="" width="22" height="22" src="<?php echo esc_url( SAPONINE_STUDIO_URL . 'assets/icons/' . $key . '.svg' ); ?>">
-				<span><?php echo esc_html( $action[0] ); ?></span>
-			<?php echo 'search' === $key ? '</button>' : '</a>'; ?>
+				<img alt="" width="22" height="22" src="<?php echo esc_url( $action['icon'] ); ?>">
+				<span><?php echo esc_html( $action['label'] ); ?></span>
+			<?php echo $search ? '</button>' : '</a>'; ?>
 		<?php endforeach; ?>
 		</nav>
 		<?php

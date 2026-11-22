@@ -27,6 +27,7 @@ class Hero_Slider extends Widget_Base {
 		$repeater->add_control( 'eyebrow', array( 'label' => esc_html__( 'زیرعنوان', 'saponine-studio' ), 'type' => Controls_Manager::TEXT, 'label_block' => true, 'default' => 'PLANT BASED WELLNESS' ) );
 		$repeater->add_control( 'caption', array( 'label' => esc_html__( 'توضیح', 'saponine-studio' ), 'type' => Controls_Manager::TEXTAREA, 'default' => 'Your Daily Dose of Wellness', 'rows' => 2 ) );
 		$repeater->add_control( 'image', array( 'label' => esc_html__( 'تصویر', 'saponine-studio' ), 'type' => Controls_Manager::MEDIA, 'default' => array( 'url' => SAPONINE_STUDIO_URL . 'assets/images/hero.jpg' ) ) );
+		$repeater->add_control( 'mobile_image', array( 'label' => esc_html__( 'تصویر اختصاصی موبایل (اختیاری)', 'saponine-studio' ), 'type' => Controls_Manager::MEDIA, 'default' => array( 'url' => '', 'id' => 0 ) ) );
 		$repeater->add_control( 'image_alt', array( 'label' => esc_html__( 'توضیح تصویر برای دسترس‌پذیری', 'saponine-studio' ), 'type' => Controls_Manager::TEXT, 'label_block' => true ) );
 		$repeater->add_control( 'layout', array( 'label' => esc_html__( 'جای تصویر', 'saponine-studio' ), 'type' => Controls_Manager::SELECT, 'default' => 'cover', 'options' => array( 'cover' => 'تصویر تمام پس‌زمینه', 'split' => 'تصویر مستقل در کنار متن' ) ) );
 		$repeater->add_control( 'text_direction', array( 'label' => esc_html__( 'جهت متن', 'saponine-studio' ), 'type' => Controls_Manager::SELECT, 'default' => 'ltr', 'options' => array( 'auto' => 'مطابق زبان صفحه', 'ltr' => 'چپ به راست', 'rtl' => 'راست به چپ' ) ) );
@@ -61,27 +62,56 @@ class Hero_Slider extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'hero_layout_style', array( 'label' => 'اندازه و چیدمان', 'tab' => Controls_Manager::TAB_STYLE ) );
-		$this->add_responsive_control( 'hero_height', array( 'label' => 'ارتفاع', 'type' => Controls_Manager::SLIDER, 'size_units' => array( 'px', 'vh', 'svh', 'dvh' ), 'range' => array( 'px' => array( 'min' => 200, 'max' => 1400 ), 'vh' => array( 'min' => 20, 'max' => 140 ), 'svh' => array( 'min' => 20, 'max' => 140 ), 'dvh' => array( 'min' => 20, 'max' => 140 ) ), 'default' => array( 'size' => 100, 'unit' => 'svh' ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => 'height: {{SIZE}}{{UNIT}};' ) ) );
-		$this->add_responsive_control( 'min_height', array( 'label' => 'حداقل ارتفاع', 'type' => Controls_Manager::SLIDER, 'range' => array( 'px' => array( 'min' => 0, 'max' => 1200 ) ), 'default' => array( 'size' => 640, 'unit' => 'px' ), 'mobile_default' => array( 'size' => 720, 'unit' => 'px' ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => 'min-height: {{SIZE}}{{UNIT}};' ) ) );
-		$this->add_responsive_control( 'text_width', array( 'label' => 'عرض بخش متن', 'type' => Controls_Manager::SLIDER, 'size_units' => array( '%' ), 'range' => array( '%' => array( 'min' => 15, 'max' => 100 ) ), 'selectors' => array( '{{WRAPPER}} .sp-hero__copy' => 'width: {{SIZE}}%;' ) ) );
-		$this->add_responsive_control( 'text_inset', array( 'label' => 'فاصله متن از لبه', 'type' => Controls_Manager::SLIDER, 'size_units' => array( '%' ), 'range' => array( '%' => array( 'min' => 0, 'max' => 80 ) ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-text-inset: {{SIZE}}%;' ) ) );
-		$this->add_responsive_control( 'text_align', array( 'label' => 'تراز متن', 'type' => Controls_Manager::SELECT, 'options' => array( 'start' => 'مطابق زبان متن', 'left' => 'چپ', 'center' => 'وسط', 'right' => 'راست' ), 'selectors' => array( '{{WRAPPER}} .sp-hero__copy' => 'text-align: {{VALUE}};' ) ) );
-		$this->add_responsive_control( 'image_width', array( 'label' => 'عرض تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'size_units' => array( '%' ), 'range' => array( '%' => array( 'min' => 10, 'max' => 100 ) ), 'selectors' => array( '{{WRAPPER}} .sp-hero__slide--split .sp-hero__media' => 'width: {{SIZE}}%;' ) ) );
-		$this->add_responsive_control( 'image_height', array( 'label' => 'ارتفاع تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'size_units' => array( 'px', 'vh' ), 'range' => array( 'px' => array( 'min' => 100, 'max' => 1200 ), 'vh' => array( 'min' => 10, 'max' => 100 ) ), 'selectors' => array( '{{WRAPPER}} .sp-hero__slide--split .sp-hero__image' => 'height: {{SIZE}}{{UNIT}};' ) ) );
-		$this->add_responsive_control( 'image_radius', array( 'label' => 'گردی گوشه تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'range' => array( 'px' => array( 'min' => 0, 'max' => 200 ) ), 'selectors' => array( '{{WRAPPER}} .sp-hero__slide--split .sp-hero__image' => 'border-radius: {{SIZE}}{{UNIT}};' ) ) );
-		$this->add_responsive_control( 'cover_position', array( 'label' => 'جای تصویر پس‌زمینه', 'type' => Controls_Manager::SELECT, 'default' => 'left center', 'mobile_default' => '25% bottom', 'options' => array( 'left center' => 'چپ', 'center center' => 'وسط', 'right center' => 'راست', '25% bottom' => 'چپ و پایین (موبایل)' ), 'selectors' => array( '{{WRAPPER}} .sp-hero__slide--cover .sp-hero__image' => 'object-position: {{VALUE}};' ) ) );
-		$this->add_responsive_control( 'wave_height', array( 'label' => 'ارتفاع موج', 'type' => Controls_Manager::SLIDER, 'range' => array( 'px' => array( 'min' => 20, 'max' => 300 ) ), 'selectors' => array( '{{WRAPPER}} .sp-hero__wave' => 'height: {{SIZE}}{{UNIT}};' ), 'condition' => array( 'show_wave' => 'yes' ) ) );
+		$this->add_responsive_control( 'hero_height', array( 'label' => 'ارتفاع', 'type' => Controls_Manager::SLIDER, 'size_units' => array( 'px', 'vh', 'svh', 'dvh' ), 'range' => array( 'px' => array( 'min' => 200, 'max' => 1400 ), 'vh' => array( 'min' => 20, 'max' => 140 ), 'svh' => array( 'min' => 20, 'max' => 140 ), 'dvh' => array( 'min' => 20, 'max' => 140 ) ), 'default' => array( 'size' => 100, 'unit' => 'svh' ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-height: {{SIZE}}{{UNIT}};' ) ) );
+		$this->add_responsive_control( 'min_height', array( 'label' => 'حداقل ارتفاع', 'type' => Controls_Manager::SLIDER, 'range' => array( 'px' => array( 'min' => 0, 'max' => 1200 ) ), 'default' => array( 'size' => 640, 'unit' => 'px' ), 'mobile_default' => array( 'size' => 720, 'unit' => 'px' ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-min-height: {{SIZE}}{{UNIT}};' ) ) );
+		$this->add_responsive_control( 'text_width', array( 'label' => 'عرض بخش متن', 'type' => Controls_Manager::SLIDER, 'size_units' => array( '%' ), 'range' => array( '%' => array( 'min' => 15, 'max' => 100 ) ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__copy' => 'width: {{SIZE}}%;' ) ) );
+		$this->add_responsive_control( 'text_inset', array( 'label' => 'فاصله متن از لبه', 'type' => Controls_Manager::SLIDER, 'size_units' => array( '%' ), 'range' => array( '%' => array( 'min' => 0, 'max' => 80 ) ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-text-inset: {{SIZE}}%; --sp-hero-custom-inset: {{SIZE}}%;' ) ) );
+		$this->add_responsive_control( 'text_align', array( 'label' => 'تراز متن', 'type' => Controls_Manager::SELECT, 'options' => array( 'start' => 'مطابق زبان متن', 'left' => 'چپ', 'center' => 'وسط', 'right' => 'راست' ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__copy' => 'text-align: {{VALUE}};' ) ) );
+		$this->add_responsive_control( 'image_width', array( 'label' => 'عرض تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'size_units' => array( '%' ), 'range' => array( '%' => array( 'min' => 10, 'max' => 100 ) ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__slide--split .sp-hero__media' => 'width: {{SIZE}}%;' ) ) );
+		$this->add_responsive_control( 'image_height', array( 'label' => 'ارتفاع تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'size_units' => array( 'px', 'vh' ), 'range' => array( 'px' => array( 'min' => 100, 'max' => 1200 ), 'vh' => array( 'min' => 10, 'max' => 100 ) ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__slide--split .sp-hero__image' => 'height: {{SIZE}}{{UNIT}};' ) ) );
+		$this->add_responsive_control( 'image_radius', array( 'label' => 'گردی گوشه تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'range' => array( 'px' => array( 'min' => 0, 'max' => 200 ) ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__slide--split .sp-hero__image' => 'border-radius: {{SIZE}}{{UNIT}};' ) ) );
+		$this->add_responsive_control( 'cover_position', array( 'label' => 'جای تصویر پس‌زمینه', 'type' => Controls_Manager::SELECT, 'default' => 'left center', 'mobile_default' => '25% bottom', 'options' => array( 'left center' => 'چپ', 'center center' => 'وسط', 'right center' => 'راست', '25% bottom' => 'چپ و پایین (موبایل)', '8% center' => 'قاب سه محصول ساپونین (موبایل)' ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__slide--cover .sp-hero__image' => '--sp-hero-cover-position: {{VALUE}};' ) ) );
+		$this->add_responsive_control( 'wave_height', array( 'label' => 'ارتفاع موج', 'type' => Controls_Manager::SLIDER, 'range' => array( 'px' => array( 'min' => 20, 'max' => 300 ) ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__wave' => 'height: {{SIZE}}{{UNIT}};' ), 'condition' => array( 'show_wave' => 'yes' ) ) );
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'hero_type_style', array( 'label' => 'رنگ و تایپوگرافی', 'tab' => Controls_Manager::TAB_STYLE ) );
 		foreach ( array( 'heading_color' => array( 'رنگ عنوان', '.sp-hero__heading', 'color' ), 'accent_color' => array( 'رنگ عنوان برجسته و دکمه‌ها', '.sp-hero', '--sp-hero-accent' ), 'caption_color' => array( 'رنگ توضیح', '.sp-hero__caption', 'color' ), 'eyebrow_color' => array( 'رنگ زیرعنوان', '.sp-hero__eyebrow', 'color' ), 'background_color' => array( 'رنگ زمینه', '.sp-hero', 'background' ), 'wave_color' => array( 'رنگ موج', '.sp-hero__wave', 'fill' ), 'button_text_color' => array( 'رنگ نوشته دکمه', '.sp-hero__link', 'color' ) ) as $name => $control ) {
-			$this->add_control( $name, array( 'label' => $control[0], 'type' => Controls_Manager::COLOR, 'selectors' => array( '{{WRAPPER}} ' . $control[1] => $control[2] . ': {{VALUE}};' ) ) );
+			$this->add_control( $name, array( 'label' => $control[0], 'type' => Controls_Manager::COLOR, 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}}' . ( '.sp-hero' === $control[1] ? '' : ' ' . $control[1] ) => $control[2] . ': {{VALUE}};' ) ) );
 		}
-		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'heading_typography', 'label' => 'عنوان', 'selector' => '{{WRAPPER}} .sp-hero__heading' ) );
-		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'eyebrow_typography', 'label' => 'زیرعنوان', 'selector' => '{{WRAPPER}} .sp-hero__eyebrow' ) );
-		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'caption_typography', 'label' => 'توضیح', 'selector' => '{{WRAPPER}} .sp-hero__caption' ) );
-		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'button_typography', 'label' => 'دکمه', 'selector' => '{{WRAPPER}} .sp-hero__link' ) );
+		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'heading_typography', 'label' => 'عنوان', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__heading' ) );
+		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'eyebrow_typography', 'label' => 'زیرعنوان', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__eyebrow' ) );
+		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'caption_typography', 'label' => 'توضیح', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__caption' ) );
+		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'button_typography', 'label' => 'دکمه', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__link' ) );
 		$this->end_controls_section();
+	}
+
+	/** Old demo documents stored editor defaults that the mobile home layout superseded. */
+	private function mobile_preset_classes() {
+		$raw = (array) $this->get_data( 'settings' );
+		$edited = (array) ( $raw['sn_slider_overrides'] ?? array() );
+		$classes = array();
+		$height = $raw['hero_height'] ?? array();
+		$desktop_default = ! is_numeric( $height['size'] ?? '' ) || ( 100.0 === (float) $height['size'] && 'svh' === ( $height['unit'] ?? '' ) );
+		if ( $desktop_default && ! is_numeric( $raw['hero_height_tablet']['size'] ?? '' ) && ! is_numeric( $raw['hero_height_mobile']['size'] ?? '' ) ) {
+			$classes[] = 'sp-hero--mobile-height-preset';
+		}
+		$minimum = $raw['min_height_mobile'] ?? array();
+		if ( ! in_array( 'min_height_mobile', $edited, true ) && ( ! is_numeric( $minimum['size'] ?? '' ) || ( 720.0 === (float) $minimum['size'] && 'px' === ( $minimum['unit'] ?? '' ) ) ) ) {
+			$classes[] = 'sp-hero--mobile-min-preset';
+		}
+		if ( ! in_array( 'cover_position_mobile', $edited, true ) && in_array( $raw['cover_position_mobile'] ?? '', array( '', '25% bottom' ), true ) ) {
+			$classes[] = 'sp-hero--mobile-position-preset';
+		}
+		return implode( ' ', $classes );
+	}
+
+	private function image_url( $media ) {
+		if ( ! is_array( $media ) ) { return ''; }
+		if ( ! empty( $media['id'] ) ) {
+			$url = wp_get_attachment_image_url( absint( $media['id'] ), 'full' );
+			if ( $url ) { return $url; }
+		}
+		return $media['url'] ?? '';
 	}
 
 	protected function render() {
@@ -94,18 +124,25 @@ class Hero_Slider extends Widget_Base {
 		$direction = class_exists( '\\Saponine\\Studio\\Multilingual' ) ? \Saponine\Studio\Multilingual::direction() : ( is_rtl() ? 'rtl' : 'ltr' );
 		$id = 'sp-hero-' . $this->get_id();
 		?>
-		<section class="sp-hero<?php echo 'yes' === $s['image_float'] ? ' sp-hero--float' : ''; ?>" id="<?php echo esc_attr( $id ); ?>" dir="<?php echo esc_attr( $direction ); ?>" data-sp-hero="<?php echo esc_attr( wp_json_encode( $config ) ); ?>" data-transition="<?php echo esc_attr( $transition ); ?>" role="region" aria-roledescription="<?php esc_attr_e( 'اسلایدر', 'saponine-studio' ); ?>" aria-label="<?php echo esc_attr( $s['carousel_label'] ); ?>">
+		<section class="sp-hero <?php echo esc_attr( $this->mobile_preset_classes() ); ?><?php echo 'yes' === $s['image_float'] ? ' sp-hero--float' : ''; ?>" id="<?php echo esc_attr( $id ); ?>" dir="<?php echo esc_attr( $direction ); ?>" data-sp-hero="<?php echo esc_attr( wp_json_encode( $config ) ); ?>" data-transition="<?php echo esc_attr( $transition ); ?>" role="region" aria-roledescription="<?php esc_attr_e( 'اسلایدر', 'saponine-studio' ); ?>" aria-label="<?php echo esc_attr( $s['carousel_label'] ); ?>" <?php if ( count( $slides ) > 1 ) { echo 'tabindex="0"'; } ?>>
 			<div class="sp-hero__slides" aria-live="off">
 			<?php foreach ( $slides as $i => $slide ) :
 				$layout = isset( $slide['layout'] ) && 'split' === $slide['layout'] ? 'split' : 'cover';
 				$dir = in_array( $slide['text_direction'] ?? '', array( 'rtl', 'ltr' ), true ) ? $slide['text_direction'] : $direction;
-				$url = isset( $slide['image']['url'] ) ? $slide['image']['url'] : '';
+				$url = $this->image_url( $slide['image'] ?? array() );
+				$mobile_url = $this->image_url( $slide['mobile_image'] ?? array() );
 				$alt = ! empty( $slide['image_alt'] ) ? $slide['image_alt'] : '';
 				if ( ! $alt && ! empty( $slide['image']['id'] ) ) { $alt = get_post_meta( absint( $slide['image']['id'] ), '_wp_attachment_image_alt', true ); }
 				$rep_id = ! empty( $slide['_id'] ) ? $slide['_id'] : 'slide-' . $i;
 				?>
 				<article id="<?php echo esc_attr( $id . '-slide-' . $i ); ?>" class="sp-hero__slide sp-hero__slide--<?php echo esc_attr( $layout ); ?> elementor-repeater-item-<?php echo esc_attr( $rep_id ); ?><?php echo 0 === $i ? ' is-active' : ''; ?>" aria-roledescription="<?php esc_attr_e( 'اسلاید', 'saponine-studio' ); ?>" aria-label="<?php echo esc_attr( ( $i + 1 ) . ' / ' . count( $slides ) ); ?>" aria-hidden="<?php echo 0 === $i ? 'false' : 'true'; ?>" <?php echo 0 === $i ? '' : 'inert'; ?>>
-					<?php if ( $url ) : ?><div class="sp-hero__media"><img class="sp-hero__image" src="<?php echo esc_url( $url ); ?>" alt="<?php echo esc_attr( $alt ); ?>" decoding="async" <?php echo 0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'; ?> /></div><?php endif; ?>
+					<?php if ( $url || $mobile_url ) : ?>
+						<div class="sp-hero__media<?php echo $mobile_url ? ' sp-hero__media--mobile-art' : ''; ?>">
+							<?php if ( $mobile_url ) : ?><picture><source media="(max-width: 767px)" srcset="<?php echo esc_url( $mobile_url ); ?>"><?php endif; ?>
+							<img class="sp-hero__image" src="<?php echo esc_url( $url ?: $mobile_url ); ?>" alt="<?php echo esc_attr( $alt ); ?>" decoding="async" <?php echo 0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'; ?> />
+							<?php if ( $mobile_url ) : ?></picture><?php endif; ?>
+						</div>
+					<?php endif; ?>
 					<div class="sp-hero__copy" dir="<?php echo esc_attr( $dir ); ?>"><div class="sp-hero__copy-inner">
 						<h2 class="sp-hero__heading"><?php echo nl2br( esc_html( $slide['title'] ?? '' ) ); ?><?php if ( ! empty( $slide['highlight'] ) ) : ?><span><?php echo nl2br( esc_html( $slide['highlight'] ) ); ?></span><?php endif; ?></h2>
 						<?php if ( ! empty( $slide['eyebrow'] ) ) : ?><div class="sp-hero__eyebrow"><?php echo esc_html( $slide['eyebrow'] ); ?></div><?php endif; ?>
@@ -120,7 +157,7 @@ class Hero_Slider extends Widget_Base {
 				</article>
 			<?php endforeach; ?>
 			</div>
-			<?php if ( count( $slides ) > 1 ) : ?>
+			<?php if ( count( $slides ) > 1 && ( 'yes' === $s['show_arrows'] || 'yes' === $s['show_dots'] || 'yes' === $s['autoplay'] ) ) : ?>
 			<div class="sp-hero__controls">
 				<?php if ( 'yes' === $s['show_arrows'] ) : ?><button type="button" class="sp-hero__arrow" data-sp-prev aria-label="<?php esc_attr_e( 'اسلاید قبلی', 'saponine-studio' ); ?>">‹</button><?php endif; ?>
 				<?php if ( 'yes' === $s['show_dots'] ) : ?><div class="sp-hero__dots" role="group" aria-label="<?php esc_attr_e( 'انتخاب اسلاید', 'saponine-studio' ); ?>"><?php foreach ( $slides as $i => $slide ) : ?><button type="button" class="sp-hero__dot" data-sp-slide="<?php echo esc_attr( $i ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'اسلاید %d', 'saponine-studio' ), $i + 1 ) ); ?>" aria-controls="<?php echo esc_attr( $id . '-slide-' . $i ); ?>" aria-pressed="<?php echo 0 === $i ? 'true' : 'false'; ?>"></button><?php endforeach; ?></div><?php endif; ?>

@@ -88,7 +88,7 @@
 .sn-hero-section .sp-hero__dot::before { width: 7px; height: 17px; background: #fff; opacity: 1; }
 .sn-hero-section .sp-hero__dot[aria-pressed="true"]::before { background: var(--sp-hero-accent); }
 .sn-hero-section .sp-hero__pause { width: 23px; height: 25px; margin: 0; border: 0; opacity: .8; }
-.sn-hero-section .sp-hero__copy { right: 6%; width: 37%; padding-block: 100px 108px; }
+.sn-hero-section .sp-hero__copy { right: var(--sp-hero-custom-inset, 6%); width: 37%; padding-block: 100px 108px; }
 .sn-hero-section .sp-hero__heading { letter-spacing: -.035em; }
 .sn-hero-section .sp-hero__slide--split .sp-hero__media { width: 55%; padding: 0; }
 .sn-hero-section .sp-hero__slide--split .sp-hero__image {
@@ -125,13 +125,13 @@
   }
   .elementor .sn-brand-strip .sn-strip-item .elementor-widget-image img,
   .elementor .sn-brand-strip .sn-strip-item .elementor-icon { width: 23px; height: 23px; }
-  .elementor .sn-hero-section .elementor-widget-saponine-hero-slider .elementor-widget-container .sp-hero { min-height: 570px; height: 100svh; }
+  .elementor .sn-hero-section .elementor-widget-saponine-hero-slider .elementor-widget-container .sp-hero { min-height: var(--sp-hero-min-height, 570px); height: var(--sp-hero-height, 100svh); }
   .sn-has-compact-header .sn-hero-section .sp-hero .sp-hero__copy {
-    inset: max(80px,var(--sn-header-clearance,80px)) 5% auto;
+    inset: max(80px,var(--sn-header-clearance,80px)) var(--sp-hero-custom-inset, 5%) auto;
     width: 90%; max-width: none; padding: 12px 0;
   }
   .sn-hero-section .sp-hero__slide--cover .sp-hero__media { top: 27%; }
-  .elementor .sn-hero-section .sp-hero .sp-hero__slide--cover .sp-hero__image { object-position: 18% bottom; }
+  .elementor .sn-hero-section .sp-hero .sp-hero__slide--cover .sp-hero__image { object-position: var(--sp-hero-cover-position, 18% bottom); }
   .sn-hero-section .sp-hero__slide--cover::after { background: linear-gradient(to bottom,#eadcf0 22%,rgba(234,220,240,.86) 31%,transparent 48%); }
   .sn-hero-section .sp-hero__slide--split .sp-hero__media,
   .sn-hero-section .sp-hero[dir="ltr"] .sp-hero__slide--split .sp-hero__media {

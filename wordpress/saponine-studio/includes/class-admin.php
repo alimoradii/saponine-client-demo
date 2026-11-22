@@ -181,6 +181,7 @@ final class Admin {
 		?>
 		<div class="wrap sn-admin" dir="rtl">
 			<h1><?php esc_html_e( 'ساپونین استودیو', 'saponine-studio' ); ?></h1>
+			<p><a class="button button-primary" href="<?php echo esc_url( admin_url( 'themes.php?page=saponine-slider' ) ); ?>">مدیریت اسلایدر ساپونین</a></p>
 			<p class="sn-admin-lead"><?php esc_html_e( 'متن‌ها، تصاویر، چیدمان، رنگ و حرکت را با المنتور تغییر دهید. صفحهٔ اصلی، سربرگ و پابرگ سه سند مستقل و قابل ویرایش‌اند.', 'saponine-studio' ); ?></p>
 			<?php if ( is_array( $notice ) && isset( $notice['text'] ) ) : ?>
 				<div class="notice notice-<?php echo 'error' === $notice['type'] ? 'error' : 'success'; ?>"><p><?php echo esc_html( $notice['text'] ); ?></p></div>

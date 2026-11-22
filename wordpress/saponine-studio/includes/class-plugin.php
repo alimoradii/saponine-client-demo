@@ -11,6 +11,8 @@ final class Plugin {
 
 	public static function boot() {
 		Admin::boot();
+		Slider_Admin::boot();
+		Slider_Companions::boot();
 		UI_Strings::boot();
 		Layout::boot();
 		Portal::boot();
