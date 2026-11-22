@@ -102,7 +102,15 @@
       picker.open();
     }
   });
-  form.addEventListener('submit', () => {
+  form.addEventListener('submit', event => {
+    const invalidNumber = form.querySelector('[data-sn-dirty] input[type="number"]:invalid');
+    if (invalidNumber) {
+      event.preventDefault();
+      const panel = invalidNumber.closest('details');
+      if (panel) panel.open = true;
+      invalidNumber.reportValidity();
+      return;
+    }
     const values = fields => Object.fromEntries(Array.from(fields, field => [field.dataset.snField, fieldValue(field)]));
     const payload = {settings:values(form.querySelectorAll('[data-sn-group] [data-sn-dirty]'))};
     if (orderChanged || list.querySelector('[data-sn-dirty]')) {

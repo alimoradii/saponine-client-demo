@@ -88,7 +88,7 @@ final class Slider_Companions {
 	private static function field( $name, $label, $value, $type = 'text' ) {
 		echo '<span class="sn-companion-field"><label>' . esc_html( $label );
 		printf( '<input type="%s" name="%s" value="%s" %s></label>', 'number' === $type ? 'number' : 'text', esc_attr( $name ), esc_attr( $value ),
-			'number' === $type ? 'min="1" step="1"' : ( in_array( $type, array( 'url', 'media' ), true ) ? 'dir="ltr"' : 'dir="auto"' ) );
+			'number' === $type ? ( 'duration' === $name ? 'min="0" step="any"' : 'step="any"' ) : ( in_array( $type, array( 'url', 'media' ), true ) ? 'dir="ltr"' : 'dir="auto"' ) );
 		if ( 'media' === $type ) { echo '<button class="button-link" type="button" data-sn-companion-media>انتخاب از رسانه‌ها</button>'; }
 		echo '</span>';
 	}
@@ -135,7 +135,7 @@ final class Slider_Companions {
 			self::form( $page, 'seal', Slider_Document::token( $seal ), 'نشان گردان پایین اسلایدر' );
 			echo '<p><label>متن وسط نشان<br><textarea rows="2" name="center" dir="auto">' . esc_textarea( $s->center_text ?? "SAPONINE\nPHARMA" ) . '</textarea></label></p>';
 			foreach ( $s->items ?? array() as $index => $item ) { self::field( "items[$index]", 'متن دور نشان', $item->text ?? '' ); }
-			self::field( 'duration', 'زمان هر دور (۳ تا ۱۸۰ ثانیه)', $s->duration ?? 28, 'number' );
+			self::field( 'duration', 'زمان هر دور (ثانیه)', $s->duration ?? 28, 'number' );
 			echo '<label><input type="checkbox" name="animate" value="1" ' . checked( $s->animate ?? 'yes', 'yes', false ) . '> چرخش نشان</label>';
 			self::editor_link( $page, 'ویرایش اندازه، جای نشان و رنگ‌ها در المنتور' );
 			self::end_form();
@@ -161,6 +161,11 @@ final class Slider_Companions {
 		return esc_url_raw( trim( $value ), array( 'http', 'https', 'mailto', 'tel' ) );
 	}
 
+	private static function number( $input ) {
+		if ( ! is_numeric( $input ) || ! is_finite( (float) $input ) ) { return null; }
+		return $input + 0;
+	}
+
 	private static function save_strip( $strip, $posted, $links ) {
 		$rows = self::strip_rows( $strip );
 		if ( array_diff_key( $rows, $posted ) ) { return new \WP_Error( 'rows', 'اطلاعات دکمه‌ها کامل نرسید.' ); }
@@ -183,7 +188,8 @@ final class Slider_Companions {
 					$row['photo']->settings->image = $media;
 				}
 			}
-			$rank[ $key ] = max( 1, absint( $r['order'] ) );
+			$rank[ $key ] = self::number( $r['order'] );
+			if ( null === $rank[ $key ] ) { return new \WP_Error( 'row_order', 'ترتیب دکمه باید یک عدد باشد.' ); }
 		}
 		asort( $rank, SORT_NUMERIC );
 		$keys = array_keys( $rank );
@@ -205,7 +211,9 @@ final class Slider_Companions {
 			$r = $posted[ $key ];
 			if ( ! isset( $r['label'], $r['url'], $r['icon'], $r['order'] ) ) { return new \WP_Error( 'row', 'اطلاعات دکمه کامل نیست.' ); }
 			$default = array( 'label' => $base[0], 'url' => $base[1], 'icon' => SAPONINE_STUDIO_URL . 'assets/icons/' . $key . '.svg', 'order' => ++$position, 'hidden' => false );
-			$values = array( 'label' => sanitize_text_field( $r['label'] ), 'url' => self::url( $r['url'] ), 'icon' => self::url( $r['icon'] ), 'order' => max( 1, absint( $r['order'] ) ), 'hidden' => ! empty( $r['hidden'] ) );
+			$order = self::number( $r['order'] );
+			if ( null === $order ) { return new \WP_Error( 'dock_order', 'ترتیب دکمه باید یک عدد باشد.' ); }
+			$values = array( 'label' => sanitize_text_field( $r['label'] ), 'url' => self::url( $r['url'] ), 'icon' => self::url( $r['icon'] ), 'order' => $order, 'hidden' => ! empty( $r['hidden'] ) );
 			if ( '' === $values['label'] || ( 'search' !== $key && '' === $values['url'] ) ) { return new \WP_Error( 'dock_value', 'عنوان و پیوند دکمه را تکمیل کنید.' ); }
 			foreach ( $default as $field => $fallback ) {
 				if ( $values[ $field ] !== $fallback ) { $new[ $key ][ $field ] = $values[ $field ]; }
@@ -244,7 +252,9 @@ final class Slider_Companions {
 				} else {
 					if ( ! isset( $in['center'], $in['duration'] ) ) { return new \WP_Error( 'seal_fields', 'اطلاعات نشان کامل نیست.' ); }
 					$node->settings->center_text = sanitize_textarea_field( $in['center'] );
-					$node->settings->duration = max( 3, min( 180, absint( $in['duration'] ) ) );
+					$duration = self::number( $in['duration'] );
+					if ( null === $duration || $duration < 0 ) { return new \WP_Error( 'seal_duration', 'زمان هر دور باید صفر یا عددی مثبت باشد.' ); }
+					$node->settings->duration = $duration;
 					$node->settings->animate = isset( $in['animate'] ) ? 'yes' : '';
 					foreach ( $node->settings->items ?? array() as $i => $item ) {
 						if ( isset( $in['items'][ $i ] ) ) { $item->text = sanitize_text_field( $in['items'][ $i ] ); }

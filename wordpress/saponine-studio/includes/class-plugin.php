@@ -35,6 +35,7 @@ final class Plugin {
 		add_action( 'elementor/frontend/after_register_scripts', array( __CLASS__, 'register_assets' ) );
 		add_action( 'elementor/frontend/after_register_styles', array( __CLASS__, 'register_assets' ) );
 		add_action( 'elementor/preview/enqueue_styles', array( __CLASS__, 'enqueue_base' ) );
+		add_action( 'elementor/editor/after_enqueue_scripts', array( __CLASS__, 'enqueue_measure_editor' ) );
 		add_filter( 'elementor/fonts/additional_fonts', array( __CLASS__, 'local_fonts' ) );
 		add_filter( 'elementor/frontend/print_google_fonts', array( __CLASS__, 'allow_google_fonts' ) );
 		Motion::boot();
@@ -42,6 +43,10 @@ final class Plugin {
 
 	public static function elementor_ready() {
 		return did_action( 'elementor/loaded' ) && defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, self::MIN_ELEMENTOR, '>=' );
+	}
+
+	public static function enqueue_measure_editor() {
+		wp_enqueue_script( 'saponine-measure-editor', SAPONINE_STUDIO_URL . 'assets/js/measure-editor.js', array(), SAPONINE_STUDIO_VERSION, true );
 	}
 
 	public static function dependency_notice() {

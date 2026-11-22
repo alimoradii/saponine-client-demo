@@ -10,6 +10,7 @@ use Elementor\Widget_Base;
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 class Hero_Slider extends Widget_Base {
+	private const DEFAULT_INTERVAL_MS = 6500;
 
 	public function get_name() { return 'saponine-hero-slider'; }
 	public function get_title() { return esc_html__( 'اسلایدر ساپونین', 'saponine-studio' ); }
@@ -51,37 +52,43 @@ class Hero_Slider extends Widget_Base {
 
 		$this->start_controls_section( 'hero_motion', array( 'label' => esc_html__( 'حرکت و انیمیشن اسلایدر', 'saponine-studio' ) ) );
 		$this->add_control( 'autoplay', array( 'label' => 'پخش خودکار', 'type' => Controls_Manager::SWITCHER, 'default' => 'yes' ) );
-		$this->add_control( 'interval', array( 'label' => 'فاصله تعویض (میلی‌ثانیه)', 'type' => Controls_Manager::NUMBER, 'default' => 6500, 'min' => 2000, 'max' => 60000, 'step' => 500, 'condition' => array( 'autoplay' => 'yes' ) ) );
+		$this->add_control( 'interval', array( 'label' => 'فاصله تعویض (میلی‌ثانیه)', 'description' => 'از شروع یک اسلاید تا شروع اسلاید بعدی. برای یک ثانیه، ۱۰۰۰ وارد کنید. صفر، پخش خودکار را خاموش می‌کند.', 'type' => Controls_Manager::NUMBER, 'default' => self::DEFAULT_INTERVAL_MS, 'min' => 0, 'step' => 'any', 'condition' => array( 'autoplay' => 'yes' ) ) );
 		$this->add_control( 'pause_hover', array( 'label' => 'توقف هنگام قرار گرفتن نشانگر', 'type' => Controls_Manager::SWITCHER, 'default' => 'yes', 'condition' => array( 'autoplay' => 'yes' ) ) );
 		$this->add_control( 'transition', array( 'label' => 'نوع تعویض', 'type' => Controls_Manager::SELECT, 'default' => 'zoom', 'options' => array( 'zoom' => 'محو و بزرگ‌نمایی', 'fade' => 'محو', 'slide' => 'حرکت افقی', 'none' => 'بدون انیمیشن' ) ) );
-		$this->add_control( 'duration', array( 'label' => 'مدت تعویض (میلی‌ثانیه)', 'type' => Controls_Manager::NUMBER, 'default' => 1200, 'min' => 100, 'max' => 5000, 'step' => 100 ) );
-		$this->add_control( 'text_delay', array( 'label' => 'تأخیر حرکت نوشته (میلی‌ثانیه)', 'type' => Controls_Manager::NUMBER, 'default' => 300, 'min' => 0, 'max' => 3000, 'step' => 50, 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-text-delay: {{VALUE}}ms;' ) ) );
+		$this->add_control( 'duration', array( 'label' => 'مدت تعویض (میلی‌ثانیه)', 'type' => Controls_Manager::NUMBER, 'default' => 1200, 'min' => 0, 'step' => 'any' ) );
+		$this->add_control( 'text_delay', array( 'label' => 'تأخیر حرکت نوشته (میلی‌ثانیه)', 'type' => Controls_Manager::NUMBER, 'default' => 300, 'step' => 'any', 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-text-delay: {{VALUE}}ms;' ) ) );
 		$this->add_control( 'image_float', array( 'label' => 'شناوری تصویر مستقل', 'type' => Controls_Manager::SWITCHER, 'default' => '' ) );
-		$this->add_control( 'float_distance', array( 'label' => 'دامنه شناوری (پیکسل)', 'type' => Controls_Manager::NUMBER, 'default' => 16, 'min' => 0, 'max' => 80, 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-float-distance: {{VALUE}}px;' ), 'condition' => array( 'image_float' => 'yes' ) ) );
-		$this->add_control( 'float_duration', array( 'label' => 'مدت چرخه شناوری (ثانیه)', 'type' => Controls_Manager::NUMBER, 'default' => 6, 'min' => 1, 'max' => 40, 'step' => .5, 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-float-duration: {{VALUE}}s;' ), 'condition' => array( 'image_float' => 'yes' ) ) );
+		$this->add_control( 'float_distance', array( 'label' => 'دامنه شناوری (پیکسل)', 'type' => Controls_Manager::NUMBER, 'default' => 16, 'step' => 'any', 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-float-distance: {{VALUE}}px;' ), 'condition' => array( 'image_float' => 'yes' ) ) );
+		$this->add_control( 'float_duration', array( 'label' => 'مدت چرخه شناوری (ثانیه)', 'type' => Controls_Manager::NUMBER, 'default' => 6, 'min' => 0, 'step' => 'any', 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-float-duration: {{VALUE}}s;' ), 'condition' => array( 'image_float' => 'yes' ) ) );
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'hero_layout_style', array( 'label' => 'اندازه و چیدمان', 'tab' => Controls_Manager::TAB_STYLE ) );
-		$this->add_responsive_control( 'hero_height', array( 'label' => 'ارتفاع', 'type' => Controls_Manager::SLIDER, 'size_units' => array( 'px', 'vh', 'svh', 'dvh' ), 'range' => array( 'px' => array( 'min' => 200, 'max' => 1400 ), 'vh' => array( 'min' => 20, 'max' => 140 ), 'svh' => array( 'min' => 20, 'max' => 140 ), 'dvh' => array( 'min' => 20, 'max' => 140 ) ), 'default' => array( 'size' => 100, 'unit' => 'svh' ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-height: {{SIZE}}{{UNIT}};' ) ) );
-		$this->add_responsive_control( 'min_height', array( 'label' => 'حداقل ارتفاع', 'type' => Controls_Manager::SLIDER, 'range' => array( 'px' => array( 'min' => 0, 'max' => 1200 ) ), 'default' => array( 'size' => 640, 'unit' => 'px' ), 'mobile_default' => array( 'size' => 720, 'unit' => 'px' ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-min-height: {{SIZE}}{{UNIT}};' ) ) );
-		$this->add_responsive_control( 'text_width', array( 'label' => 'عرض بخش متن', 'type' => Controls_Manager::SLIDER, 'size_units' => array( '%' ), 'range' => array( '%' => array( 'min' => 15, 'max' => 100 ) ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__copy' => 'width: {{SIZE}}%;' ) ) );
-		$this->add_responsive_control( 'text_inset', array( 'label' => 'فاصله متن از لبه', 'type' => Controls_Manager::SLIDER, 'size_units' => array( '%' ), 'range' => array( '%' => array( 'min' => 0, 'max' => 80 ) ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-text-inset: {{SIZE}}%; --sp-hero-custom-inset: {{SIZE}}%;' ) ) );
+		$this->add_responsive_control( 'hero_height', array( 'label' => 'ارتفاع', 'type' => Controls_Manager::SLIDER, 'classes' => 'sp-hero-measure', 'size_units' => array( 'px', 'vh', 'svh', 'dvh' ), 'default' => array( 'size' => 100, 'unit' => 'svh' ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-height: {{SIZE}}{{UNIT}};' ) ) );
+		$this->add_responsive_control( 'min_height', array( 'label' => 'حداقل ارتفاع', 'type' => Controls_Manager::SLIDER, 'classes' => 'sp-hero-measure', 'default' => array( 'size' => 640, 'unit' => 'px' ), 'mobile_default' => array( 'size' => 720, 'unit' => 'px' ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-min-height: {{SIZE}}{{UNIT}};' ) ) );
+		$this->add_responsive_control( 'text_width', array( 'label' => 'عرض بخش متن', 'type' => Controls_Manager::SLIDER, 'classes' => 'sp-hero-measure', 'size_units' => array( '%' ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__copy' => 'width: {{SIZE}}%; max-width: none;' ) ) );
+		$this->add_responsive_control( 'text_inset', array( 'label' => 'فاصله متن از لبه', 'type' => Controls_Manager::SLIDER, 'classes' => 'sp-hero-measure sp-hero-measure--signed', 'size_units' => array( '%' ), 'selectors' => array( '{{WRAPPER}} .sp-hero' => '--sp-hero-text-inset: {{SIZE}}%; --sp-hero-custom-inset: {{SIZE}}%;' ) ) );
 		$this->add_responsive_control( 'text_align', array( 'label' => 'تراز متن', 'type' => Controls_Manager::SELECT, 'options' => array( 'start' => 'مطابق زبان متن', 'left' => 'چپ', 'center' => 'وسط', 'right' => 'راست' ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__copy' => 'text-align: {{VALUE}};' ) ) );
-		$this->add_responsive_control( 'image_width', array( 'label' => 'عرض تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'size_units' => array( '%' ), 'range' => array( '%' => array( 'min' => 10, 'max' => 100 ) ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__slide--split .sp-hero__media' => 'width: {{SIZE}}%;' ) ) );
-		$this->add_responsive_control( 'image_height', array( 'label' => 'ارتفاع تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'size_units' => array( 'px', 'vh' ), 'range' => array( 'px' => array( 'min' => 100, 'max' => 1200 ), 'vh' => array( 'min' => 10, 'max' => 100 ) ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__slide--split .sp-hero__image' => 'height: {{SIZE}}{{UNIT}};' ) ) );
-		$this->add_responsive_control( 'image_radius', array( 'label' => 'گردی گوشه تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'range' => array( 'px' => array( 'min' => 0, 'max' => 200 ) ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__slide--split .sp-hero__image' => 'border-radius: {{SIZE}}{{UNIT}};' ) ) );
+		$this->add_responsive_control( 'image_width', array( 'label' => 'عرض تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'classes' => 'sp-hero-measure', 'size_units' => array( '%' ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__slide--split .sp-hero__media' => 'width: {{SIZE}}%; max-width: none;' ) ) );
+		$this->add_responsive_control( 'image_height', array( 'label' => 'ارتفاع تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'classes' => 'sp-hero-measure', 'size_units' => array( 'px', 'vh' ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__slide--split .sp-hero__image' => 'height: {{SIZE}}{{UNIT}}; max-height: none;' ) ) );
+		$this->add_responsive_control( 'image_radius', array( 'label' => 'گردی گوشه تصویر مستقل', 'type' => Controls_Manager::SLIDER, 'classes' => 'sp-hero-measure', 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__slide--split .sp-hero__image' => 'border-radius: {{SIZE}}{{UNIT}};' ) ) );
 		$this->add_responsive_control( 'cover_position', array( 'label' => 'جای تصویر پس‌زمینه', 'type' => Controls_Manager::SELECT, 'default' => 'left center', 'mobile_default' => '25% bottom', 'options' => array( 'left center' => 'چپ', 'center center' => 'وسط', 'right center' => 'راست', '25% bottom' => 'چپ و پایین (موبایل)', '8% center' => 'قاب سه محصول ساپونین (موبایل)' ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__slide--cover .sp-hero__image' => '--sp-hero-cover-position: {{VALUE}};' ) ) );
-		$this->add_responsive_control( 'wave_height', array( 'label' => 'ارتفاع موج', 'type' => Controls_Manager::SLIDER, 'range' => array( 'px' => array( 'min' => 20, 'max' => 300 ) ), 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__wave' => 'height: {{SIZE}}{{UNIT}};' ), 'condition' => array( 'show_wave' => 'yes' ) ) );
+		$this->add_responsive_control( 'wave_height', array( 'label' => 'ارتفاع موج', 'type' => Controls_Manager::SLIDER, 'classes' => 'sp-hero-measure', 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__wave' => 'height: {{SIZE}}{{UNIT}};' ), 'condition' => array( 'show_wave' => 'yes' ) ) );
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'hero_type_style', array( 'label' => 'رنگ و تایپوگرافی', 'tab' => Controls_Manager::TAB_STYLE ) );
 		foreach ( array( 'heading_color' => array( 'رنگ عنوان', '.sp-hero__heading', 'color' ), 'accent_color' => array( 'رنگ عنوان برجسته و دکمه‌ها', '.sp-hero', '--sp-hero-accent' ), 'caption_color' => array( 'رنگ توضیح', '.sp-hero__caption', 'color' ), 'eyebrow_color' => array( 'رنگ زیرعنوان', '.sp-hero__eyebrow', 'color' ), 'background_color' => array( 'رنگ زمینه', '.sp-hero', 'background' ), 'wave_color' => array( 'رنگ موج', '.sp-hero__wave', 'fill' ), 'button_text_color' => array( 'رنگ نوشته دکمه', '.sp-hero__link', 'color' ) ) as $name => $control ) {
 			$this->add_control( $name, array( 'label' => $control[0], 'type' => Controls_Manager::COLOR, 'selectors' => array( '{{WRAPPER}} #sp-hero-{{ID}}' . ( '.sp-hero' === $control[1] ? '' : ' ' . $control[1] ) => $control[2] . ': {{VALUE}};' ) ) );
 		}
-		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'heading_typography', 'label' => 'عنوان', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__heading' ) );
-		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'eyebrow_typography', 'label' => 'زیرعنوان', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__eyebrow' ) );
-		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'caption_typography', 'label' => 'توضیح', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__caption' ) );
-		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'button_typography', 'label' => 'دکمه', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__link' ) );
+		$size_inputs = array(
+			'font_size'      => array( 'classes' => 'sp-hero-measure' ),
+			'line_height'    => array( 'classes' => 'sp-hero-measure' ),
+			'letter_spacing' => array( 'classes' => 'sp-hero-measure sp-hero-measure--signed' ),
+			'word_spacing'   => array( 'classes' => 'sp-hero-measure sp-hero-measure--signed' ),
+		);
+		$this->add_group_control( Group_Control_Typography::get_type(), array( 'fields_options' => $size_inputs, 'name' => 'heading_typography', 'label' => 'عنوان', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__heading' ) );
+		$this->add_group_control( Group_Control_Typography::get_type(), array( 'fields_options' => $size_inputs, 'name' => 'eyebrow_typography', 'label' => 'زیرعنوان', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__eyebrow' ) );
+		$this->add_group_control( Group_Control_Typography::get_type(), array( 'fields_options' => $size_inputs, 'name' => 'caption_typography', 'label' => 'توضیح', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__caption' ) );
+		$this->add_group_control( Group_Control_Typography::get_type(), array( 'fields_options' => $size_inputs, 'name' => 'button_typography', 'label' => 'دکمه', 'selector' => '{{WRAPPER}} #sp-hero-{{ID}} .sp-hero__link' ) );
 		$this->end_controls_section();
 	}
 
@@ -114,12 +121,25 @@ class Hero_Slider extends Widget_Base {
 		return $media['url'] ?? '';
 	}
 
+	private static function milliseconds( $value, $default ) {
+		if ( ! is_numeric( $value ) ) { return $default; }
+		$number = (float) $value;
+		return is_finite( $number ) && $number >= 0 ? $number : $default;
+	}
+
 	protected function render() {
 		$s = $this->get_settings_for_display();
 		$slides = isset( $s['slides'] ) && is_array( $s['slides'] ) ? $s['slides'] : array();
 		if ( ! $slides ) { return; }
 		$transition = in_array( $s['transition'], array( 'fade', 'slide', 'zoom', 'none' ), true ) ? $s['transition'] : 'fade';
-		$config = array( 'autoplay' => 'yes' === $s['autoplay'], 'interval' => max( 2000, min( 60000, (int) $s['interval'] ) ), 'duration' => max( 100, min( 5000, (int) $s['duration'] ) ), 'pauseHover' => 'yes' === $s['pause_hover'], 'transition' => $transition );
+		$interval = self::milliseconds( $s['interval'] ?? null, self::DEFAULT_INTERVAL_MS );
+		$config = array(
+			'autoplay'   => 'yes' === $s['autoplay'] && $interval > 0,
+			'interval'   => $interval,
+			'duration'   => self::milliseconds( $s['duration'] ?? null, 1200 ),
+			'pauseHover' => 'yes' === $s['pause_hover'],
+			'transition' => $transition,
+		);
 		$config['labels'] = array( 'play' => __( 'پخش خودکار اسلایدها', 'saponine-studio' ), 'pause' => __( 'توقف پخش خودکار', 'saponine-studio' ), 'reduced' => __( 'پخش خودکار مطابق تنظیم کاهش حرکت دستگاه غیرفعال است', 'saponine-studio' ), 'editor' => __( 'پخش خودکار در ویرایشگر متوقف است؛ از نشانگرها استفاده کنید', 'saponine-studio' ) );
 		$direction = class_exists( '\\Saponine\\Studio\\Multilingual' ) ? \Saponine\Studio\Multilingual::direction() : ( is_rtl() ? 'rtl' : 'ltr' );
 		$id = 'sp-hero-' . $this->get_id();
@@ -157,12 +177,12 @@ class Hero_Slider extends Widget_Base {
 				</article>
 			<?php endforeach; ?>
 			</div>
-			<?php if ( count( $slides ) > 1 && ( 'yes' === $s['show_arrows'] || 'yes' === $s['show_dots'] || 'yes' === $s['autoplay'] ) ) : ?>
+			<?php if ( count( $slides ) > 1 && ( 'yes' === $s['show_arrows'] || 'yes' === $s['show_dots'] || $config['autoplay'] ) ) : ?>
 			<div class="sp-hero__controls">
 				<?php if ( 'yes' === $s['show_arrows'] ) : ?><button type="button" class="sp-hero__arrow" data-sp-prev aria-label="<?php esc_attr_e( 'اسلاید قبلی', 'saponine-studio' ); ?>">‹</button><?php endif; ?>
 				<?php if ( 'yes' === $s['show_dots'] ) : ?><div class="sp-hero__dots" role="group" aria-label="<?php esc_attr_e( 'انتخاب اسلاید', 'saponine-studio' ); ?>"><?php foreach ( $slides as $i => $slide ) : ?><button type="button" class="sp-hero__dot" data-sp-slide="<?php echo esc_attr( $i ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'اسلاید %d', 'saponine-studio' ), $i + 1 ) ); ?>" aria-controls="<?php echo esc_attr( $id . '-slide-' . $i ); ?>" aria-pressed="<?php echo 0 === $i ? 'true' : 'false'; ?>"></button><?php endforeach; ?></div><?php endif; ?>
 				<?php if ( 'yes' === $s['show_arrows'] ) : ?><button type="button" class="sp-hero__arrow" data-sp-next aria-label="<?php esc_attr_e( 'اسلاید بعدی', 'saponine-studio' ); ?>">›</button><?php endif; ?>
-				<?php if ( 'yes' === $s['autoplay'] ) : ?><button type="button" class="sp-hero__pause" data-sp-pause aria-label="<?php esc_attr_e( 'توقف پخش خودکار', 'saponine-studio' ); ?>" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button><?php endif; ?>
+				<?php if ( $config['autoplay'] ) : ?><button type="button" class="sp-hero__pause" data-sp-pause aria-label="<?php esc_attr_e( 'توقف پخش خودکار', 'saponine-studio' ); ?>" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button><?php endif; ?>
 			</div>
 			<?php endif; ?>
 			<?php if ( 'yes' === $s['show_wave'] ) : ?><svg class="sp-hero__wave" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 202 H80 C135 202 132 24 198 24 S264 202 314 202 H1440 V205 H0 Z" /></svg><?php endif; ?>

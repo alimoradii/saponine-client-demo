@@ -101,7 +101,7 @@ final class Slider_Admin {
 			$units = self::units( $field );
 			$unit  = $value['unit'] ?? reset( $units );
 			?>
-			<div class="sn-slider-measure"><input id="<?php echo esc_attr( $id ); ?>" type="number" step="any" data-sn-part="size" placeholder="پیش‌فرض" value="<?php echo esc_attr( $value['size'] ?? '' ); ?>">
+			<div class="sn-slider-measure"><input id="<?php echo esc_attr( $id ); ?>" type="number" step="any" <?php if ( ! self::allows_negative( $key ) ) { echo 'min="0"'; } ?> data-sn-part="size" placeholder="پیش‌فرض" value="<?php echo esc_attr( $value['size'] ?? '' ); ?>">
 			<select aria-label="<?php echo esc_attr( 'واحد ' . $label ); ?>" data-sn-part="unit"><?php foreach ( $units as $item ) : ?>
 				<option <?php selected( $unit, $item ); ?>><?php echo esc_html( $item ); ?></option><?php endforeach; ?></select></div>
 		<?php elseif ( in_array( $type, array( 'switcher', 'popover_toggle' ), true ) ) : ?>
@@ -113,7 +113,8 @@ final class Slider_Admin {
 		<?php elseif ( 'textarea' === $type ) : ?>
 			<textarea id="<?php echo esc_attr( $id ); ?>" dir="auto" rows="2"><?php echo esc_textarea( $value ); ?></textarea>
 		<?php elseif ( 'number' === $type ) : ?>
-			<input id="<?php echo esc_attr( $id ); ?>" type="number" step="<?php echo esc_attr( $field['step'] ?? 'any' ); ?>" min="<?php echo esc_attr( $field['min'] ?? '' ); ?>" max="<?php echo esc_attr( $field['max'] ?? '' ); ?>" value="<?php echo esc_attr( $value ); ?>">
+			<input id="<?php echo esc_attr( $id ); ?>" type="number" step="any" <?php if ( ! self::allows_negative( $key ) ) { echo 'min="0"'; } ?> value="<?php echo esc_attr( $value ); ?>">
+			<?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo esc_html( $field['description'] ); ?></small><?php endif; ?>
 		<?php else : ?>
 			<div class="sn-slider-inline"><input id="<?php echo esc_attr( $id ); ?>" type="text" dir="auto" value="<?php echo esc_attr( is_scalar( $value ) ? $value : '' ); ?>">
 			<?php if ( 'color' === $type ) : ?><input type="color" data-sn-color aria-label="<?php echo esc_attr( 'انتخاب ' . $label ); ?>" value="<?php echo esc_attr( preg_match( '/^#[0-9a-f]{6}$/i', (string) $value ) ? $value : '#7d4697' ); ?>"><?php endif; ?></div>
@@ -208,6 +209,16 @@ final class Slider_Admin {
 		return new \WP_Error( 'sn_slider_value', sprintf( 'مقدار «%s» معتبر نیست.', wp_strip_all_tags( $field['label'] ?? $field['name'] ) ) );
 	}
 
+	private static function allows_negative( $key ) {
+		return in_array( $key, array( 'float_distance', 'text_delay' ), true ) ||
+			(bool) preg_match( '/(?:^text_inset|_letter_spacing|_word_spacing)(?:_[a-z0-9_]+)?$/', $key );
+	}
+
+	private static function valid_number( $key, $value ) {
+		return is_numeric( $value ) && is_finite( (float) $value ) &&
+			( (float) $value >= 0 || self::allows_negative( $key ) );
+	}
+
 	/** Validate the few modified fields against the widget's own controls. */
 	private static function clean( $key, $field, $value, $old ) {
 		$type = $field['type'];
@@ -217,9 +228,7 @@ final class Slider_Admin {
 			if ( 'slider' === $type ) {
 				$unit = $value['unit'] ?? '';
 				$size = $value['size'] ?? '';
-				if ( ! in_array( $unit, self::units( $field ), true ) || ( '' !== $size && ! is_numeric( $size ) ) ) { return self::invalid( $field ); }
-				$range = $field['range'][ $unit ] ?? array();
-				if ( '' !== $size && ( ( isset( $range['min'] ) && $size < $range['min'] ) || ( isset( $range['max'] ) && $size > $range['max'] ) ) ) { return self::invalid( $field ); }
+				if ( ! in_array( $unit, self::units( $field ), true ) || ( '' !== $size && ! self::valid_number( $key, $size ) ) ) { return self::invalid( $field ); }
 				return '' === $size ? null : array_merge( $old, array( 'size' => (float) $size, 'unit' => $unit ) );
 			}
 			$raw = $value['url'] ?? '';
@@ -249,8 +258,7 @@ final class Slider_Admin {
 		}
 		if ( 'number' === $type ) {
 			if ( '' === $value ) { return null; }
-			if ( ! is_numeric( $value ) || ( isset( $field['min'] ) && $value < $field['min'] ) || ( isset( $field['max'] ) && $value > $field['max'] ) ) { return self::invalid( $field ); }
-			return (float) $value;
+			return self::valid_number( $key, $value ) ? (float) $value : self::invalid( $field );
 		}
 		if ( 'color' === $type ) {
 			$value = trim( $value );

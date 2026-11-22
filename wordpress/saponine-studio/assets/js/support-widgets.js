@@ -9,7 +9,11 @@
     el.addEventListener(name, fn, opts);
     removers.push(() => el.removeEventListener(name, fn, opts));
   };
-  const clamp = (n, min, max, fallback) => Number.isFinite(Number(n)) ? Math.max(min, Math.min(max, Number(n))) : fallback;
+  function milliseconds(value, fallback) {
+    if (typeof value !== 'number' && !(typeof value === 'string' && value.trim())) return fallback;
+    const number = Number(value);
+    return Number.isFinite(number) && number >= 0 ? number : fallback;
+  }
 
   function hero(root) {
     const removers = [];
@@ -20,8 +24,8 @@
     const dots = Array.from(root.querySelectorAll('[data-sp-slide]'));
     const pause = root.querySelector('[data-sp-pause]');
     const live = root.querySelector('.sp-hero__slides');
-    const interval = clamp(config.interval, 2000, 60000, 6500);
-    const duration = clamp(config.duration, 100, 5000, 1200);
+    const interval = milliseconds(config.interval, 6500);
+    const duration = milliseconds(config.duration, 1200);
     let index = Math.max(0, slides.findIndex(slide => slide.classList.contains('is-active')));
     let timer = 0;
     let focusPaused = false;
@@ -32,12 +36,23 @@
     const editor = editorMode();
     root.classList.toggle('is-editor', editor);
     root.style.setProperty('--sp-hero-duration', `${duration}ms`);
-    const canPlay = () => config.autoplay && slides.length > 1 && !userPaused && !focusPaused && !hoverPaused && !motion.matches && !document.hidden && inView && !editor;
+    root.classList.toggle('sp-hero--instant', duration === 0);
+    const canPlay = () => config.autoplay && interval > 0 && slides.length > 1 && !userPaused && !focusPaused && !hoverPaused && !motion.matches && !document.hidden && inView && !editor;
 
     function schedule() {
       window.clearTimeout(timer);
-      if (live) live.setAttribute('aria-live', canPlay() ? 'off' : 'polite');
-      if (canPlay()) timer = window.setTimeout(() => show(index + 1, false), interval);
+      const playing = canPlay();
+      if (live) live.setAttribute('aria-live', playing ? 'off' : 'polite');
+      if (!playing) return;
+      // Each browser timer can wait at most 2^31 - 1 ms. Keep one cancellable timer for longer waits.
+      const maxTimeout = 2147483647;
+      const deadline = performance.now() + interval;
+      function advance() {
+        const remaining = deadline - performance.now();
+        if (remaining > 0) timer = window.setTimeout(advance, Math.min(Math.ceil(remaining), maxTimeout));
+        else show(index + 1, false);
+      }
+      timer = window.setTimeout(advance, Math.min(Math.ceil(interval), maxTimeout));
     }
 
     function show(next, manual) {

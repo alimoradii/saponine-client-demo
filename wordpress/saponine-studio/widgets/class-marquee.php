@@ -28,7 +28,7 @@ class Marquee extends Widget_Base {
 		$this->add_control( 'text_direction', array( 'label' => 'جهت نوشته', 'type' => Controls_Manager::SELECT, 'default' => 'ltr', 'options' => array( 'auto' => 'مطابق زبان صفحه', 'ltr' => 'چپ به راست', 'rtl' => 'راست به چپ' ) ) );
 		$this->add_control( 'center_text', array( 'label' => 'نوشته مرکز نشان گرد', 'type' => Controls_Manager::TEXTAREA, 'default' => "SAPONINE\nPHARMA", 'rows' => 2, 'condition' => array( 'mode' => 'circle' ) ) );
 		$this->add_control( 'animate', array( 'label' => 'فعال بودن حرکت', 'type' => Controls_Manager::SWITCHER, 'default' => 'yes' ) );
-		$this->add_control( 'duration', array( 'label' => 'مدت یک دور (ثانیه)', 'type' => Controls_Manager::NUMBER, 'default' => 28, 'min' => 3, 'max' => 180, 'step' => 1, 'selectors' => array( '{{WRAPPER}} .sp-marquee' => '--sp-marquee-duration: {{VALUE}}s;' ) ) );
+		$this->add_control( 'duration', array( 'label' => 'مدت یک دور (ثانیه)', 'type' => Controls_Manager::NUMBER, 'default' => 28, 'min' => 0, 'step' => 'any', 'selectors' => array( '{{WRAPPER}} .sp-marquee' => '--sp-marquee-duration: {{VALUE}}s;' ) ) );
 		$this->add_control( 'direction', array( 'label' => 'جهت حرکت', 'type' => Controls_Manager::SELECT, 'default' => 'left', 'options' => array( 'left' => 'چپ / ساعت‌گرد', 'right' => 'راست / پادساعت‌گرد' ) ) );
 		$this->add_control( 'pause_hover', array( 'label' => 'توقف هنگام هاور یا فوکوس', 'type' => Controls_Manager::SWITCHER, 'default' => 'yes' ) );
 		$this->add_control( 'show_pause', array( 'label' => 'دکمه توقف حرکت', 'type' => Controls_Manager::SWITCHER, 'default' => 'yes', 'condition' => array( 'animate' => 'yes', 'mode' => 'line' ) ) );
@@ -38,12 +38,20 @@ class Marquee extends Widget_Base {
 		$this->add_control( 'background_color', array( 'label' => 'رنگ پس‌زمینه', 'type' => Controls_Manager::COLOR, 'selectors' => array( '{{WRAPPER}} .sp-marquee' => 'background: {{VALUE}};' ) ) );
 		$this->add_control( 'center_color', array( 'label' => 'رنگ نوشته مرکز', 'type' => Controls_Manager::COLOR, 'selectors' => array( '{{WRAPPER}} .sp-marquee__center' => 'color: {{VALUE}};' ), 'condition' => array( 'mode' => 'circle' ) ) );
 		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'text_typography', 'selector' => '{{WRAPPER}} .sp-marquee__track', 'condition' => array( 'mode' => 'line' ) ) );
-		$this->add_group_control( Group_Control_Typography::get_type(), array( 'name' => 'center_typography', 'selector' => '{{WRAPPER}} .sp-marquee__center', 'condition' => array( 'mode' => 'circle' ) ) );
+		$this->add_group_control( Group_Control_Typography::get_type(), array(
+			'name' => 'center_typography', 'selector' => '{{WRAPPER}} .sp-marquee__center', 'condition' => array( 'mode' => 'circle' ),
+			'fields_options' => array(
+				'font_size' => array( 'classes' => 'sp-hero-measure' ),
+				'line_height' => array( 'classes' => 'sp-hero-measure' ),
+				'letter_spacing' => array( 'classes' => 'sp-hero-measure sp-hero-measure--signed' ),
+				'word_spacing' => array( 'classes' => 'sp-hero-measure sp-hero-measure--signed' ),
+			),
+		) );
 		$this->add_responsive_control( 'gap', array( 'label' => 'فاصله نوشته‌ها', 'type' => Controls_Manager::SLIDER, 'default' => array( 'size' => 48, 'unit' => 'px' ), 'range' => array( 'px' => array( 'min' => 0, 'max' => 200 ) ), 'selectors' => array( '{{WRAPPER}} .sp-marquee' => '--sp-marquee-gap: {{SIZE}}{{UNIT}};' ), 'condition' => array( 'mode' => 'line' ) ) );
 		$this->add_responsive_control( 'padding', array( 'label' => 'فاصله داخلی نوار', 'type' => Controls_Manager::DIMENSIONS, 'size_units' => array( 'px', 'em' ), 'selectors' => array( '{{WRAPPER}} .sp-marquee--line' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ), 'condition' => array( 'mode' => 'line' ) ) );
-		$this->add_responsive_control( 'circle_size', array( 'label' => 'قطر نشان گرد', 'type' => Controls_Manager::SLIDER, 'range' => array( 'px' => array( 'min' => 70, 'max' => 500 ) ), 'default' => array( 'size' => 124, 'unit' => 'px' ), 'selectors' => array( '{{WRAPPER}} .sp-marquee--circle' => 'width: {{SIZE}}{{UNIT}};' ), 'condition' => array( 'mode' => 'circle' ) ) );
-		$this->add_control( 'ring_font_size', array( 'label' => 'اندازه نوشته حلقه', 'type' => Controls_Manager::NUMBER, 'default' => 7.5, 'min' => 4, 'max' => 18, 'step' => .5, 'selectors' => array( '{{WRAPPER}} .sp-marquee__ring-text' => 'font-size: {{VALUE}}px;' ), 'condition' => array( 'mode' => 'circle' ) ) );
-		$this->add_control( 'ring_letter_spacing', array( 'label' => 'فاصله حروف حلقه', 'type' => Controls_Manager::NUMBER, 'default' => 1.5, 'min' => 0, 'max' => 5, 'step' => .1, 'selectors' => array( '{{WRAPPER}} .sp-marquee__ring-text' => 'letter-spacing: {{VALUE}}px;' ), 'condition' => array( 'mode' => 'circle' ) ) );
+		$this->add_responsive_control( 'circle_size', array( 'label' => 'قطر نشان گرد', 'type' => Controls_Manager::SLIDER, 'classes' => 'sp-hero-measure', 'default' => array( 'size' => 124, 'unit' => 'px' ), 'selectors' => array( '{{WRAPPER}}' => '--sn-seal-diameter: {{SIZE}}{{UNIT}};', '{{WRAPPER}} .sp-marquee--circle' => 'width: {{SIZE}}{{UNIT}};' ), 'condition' => array( 'mode' => 'circle' ) ) );
+		$this->add_control( 'ring_font_size', array( 'label' => 'اندازه نوشته حلقه', 'type' => Controls_Manager::NUMBER, 'default' => 7.5, 'min' => 0, 'step' => 'any', 'selectors' => array( '{{WRAPPER}} .sp-marquee__ring-text' => 'font-size: {{VALUE}}px;' ), 'condition' => array( 'mode' => 'circle' ) ) );
+		$this->add_control( 'ring_letter_spacing', array( 'label' => 'فاصله حروف حلقه', 'type' => Controls_Manager::NUMBER, 'default' => 1.5, 'step' => 'any', 'selectors' => array( '{{WRAPPER}} .sp-marquee__ring-text' => 'letter-spacing: {{VALUE}}px;' ), 'condition' => array( 'mode' => 'circle' ) ) );
 		$this->end_controls_section();
 	}
 
@@ -54,6 +62,14 @@ class Marquee extends Widget_Base {
 		if ( ! $items ) { return; }
 		$reverse = 'right' === $s['direction'];
 		$classes = 'sp-marquee sp-marquee--' . $mode;
+		if ( 'circle' === $mode ) {
+			$raw = $this->get_data( 'settings' );
+			$diameter = $raw['circle_size'] ?? array();
+			$stock = ! is_numeric( $diameter['size'] ?? null ) || ( 124.0 === (float) $diameter['size'] && 'px' === ( $diameter['unit'] ?? 'px' ) );
+			if ( $stock && ! is_numeric( $raw['circle_size_tablet']['size'] ?? null ) && ! is_numeric( $raw['circle_size_mobile']['size'] ?? null ) ) {
+				$classes .= ' sp-marquee--phone-preset';
+			}
+		}
 		$classes .= 'yes' === $s['animate'] ? ' is-animated' : '';
 		$classes .= 'yes' === $s['pause_hover'] ? ' sp-marquee--pause-hover' : '';
 		$classes .= $reverse ? ' sp-marquee--reverse' : '';

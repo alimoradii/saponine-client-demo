@@ -74,8 +74,8 @@
   position: absolute;
   inset: auto auto -54px 13.75%;
   transform: translateX(-50%);
-  width: max-content;
-  max-width: 20%;
+  width: var(--sn-seal-diameter, max-content);
+  max-width: none;
 }
 .sn-hero-section .sp-hero__controls {
   bottom: 6.7%;
