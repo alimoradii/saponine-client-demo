@@ -1,0 +1,1020 @@
+{
+  "version": "0.4",
+  "title": "Saponine — footer",
+  "type": "section",
+  "content": [
+    {
+      "id": "b4b83f1",
+      "elType": "container",
+      "settings": {
+        "content_width": "full",
+        "flex_direction": "column",
+        "flex_gap": {
+          "column": "0",
+          "row": "0",
+          "isLinked": true,
+          "unit": "px",
+          "size": 0
+        },
+        "padding": {
+          "unit": "px",
+          "top": "0",
+          "right": "0",
+          "bottom": "0",
+          "left": "0",
+          "isLinked": true
+        },
+        "_element_id": "sec-6",
+        "html_tag": "div",
+        "background_background": "classic",
+        "background_color": "#27222E",
+        "min_height": {
+          "size": 100,
+          "unit": "vh",
+          "sizes": []
+        },
+        "min_height_mobile": {
+          "size": 0,
+          "unit": "px",
+          "sizes": []
+        },
+        "flex_justify_content": "center",
+        "css_classes": "sn-footer",
+        "_title": "پابرگ — همه ستون‌ها قابل جابه‌جایی"
+      },
+      "elements": [
+        {
+          "id": "b533b74",
+          "elType": "container",
+          "settings": {
+            "content_width": "boxed",
+            "flex_direction": "row",
+            "flex_gap": {
+              "column": "24",
+              "row": "32",
+              "unit": "px",
+              "isLinked": false
+            },
+            "padding": {
+              "unit": "px",
+              "top": "64",
+              "right": "24",
+              "bottom": "64",
+              "left": "24",
+              "isLinked": false
+            },
+            "boxed_width": {
+              "size": 1280,
+              "unit": "px",
+              "sizes": []
+            },
+            "flex_wrap": "wrap",
+            "css_classes": "sn-footer-columns",
+            "_title": "ستون‌های پابرگ"
+          },
+          "elements": [
+            {
+              "id": "9daf11f",
+              "elType": "container",
+              "settings": {
+                "content_width": "full",
+                "flex_direction": "column",
+                "flex_gap": {
+                  "column": "0",
+                  "row": "0",
+                  "isLinked": true,
+                  "unit": "px",
+                  "size": 0
+                },
+                "padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": true
+                },
+                "width": {
+                  "size": 25,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "width_tablet": {
+                  "size": 100,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "width_mobile": {
+                  "size": 100,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "css_classes": "sn-footer-column sn-footer-intro",
+                "_title": "لوگو و معرفی پابرگ"
+              },
+              "elements": [
+                {
+                  "id": "f8f1c6a",
+                  "elType": "container",
+                  "settings": {
+                    "content_width": "full",
+                    "flex_direction": "column",
+                    "flex_gap": {
+                      "column": "0",
+                      "row": "0",
+                      "isLinked": true,
+                      "unit": "px",
+                      "size": 0
+                    },
+                    "padding": {
+                      "unit": "px",
+                      "top": "12",
+                      "right": "12",
+                      "bottom": "12",
+                      "left": "12",
+                      "isLinked": true
+                    },
+                    "width": {
+                      "size": 152,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "width_tablet": {
+                      "size": 152,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "width_mobile": {
+                      "size": 152,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "16",
+                      "right": "16",
+                      "bottom": "16",
+                      "left": "16",
+                      "isLinked": true
+                    },
+                    "background_background": "classic",
+                    "background_color": "#ffffff",
+                    "css_classes": "sn-footer-logo-plate",
+                    "_title": "زمینه لوگوی پابرگ"
+                  },
+                  "elements": [
+                    {
+                      "id": "30086ad",
+                      "elType": "widget",
+                      "settings": {
+                        "image": {
+                          "url": "{{asset:logo.png}}",
+                          "id": 0
+                        },
+                        "image_size": "full",
+                        "width": {
+                          "size": 128,
+                          "unit": "px",
+                          "sizes": []
+                        },
+                        "align": "center",
+                        "_title": "لوگوی پابرگ"
+                      },
+                      "elements": [],
+                      "widgetType": "image"
+                    }
+                  ]
+                },
+                {
+                  "id": "a9bea8c",
+                  "elType": "widget",
+                  "settings": {
+                    "editor": "<p>شرکت داروسازی ساپونین؛ سلامت هدفمند با پشتوانه علمی.</p>",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_line_height": {
+                      "size": 2.1,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "text_color": "#D7D2DD",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "16",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "شرکت داروسازی ساپونین؛ سلامت هدفمند"
+                  },
+                  "elements": [],
+                  "widgetType": "text-editor"
+                }
+              ]
+            },
+            {
+              "id": "6bea399",
+              "elType": "container",
+              "settings": {
+                "content_width": "full",
+                "flex_direction": "column",
+                "flex_gap": {
+                  "column": "0",
+                  "row": "0",
+                  "isLinked": true,
+                  "unit": "px",
+                  "size": 0
+                },
+                "padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": true
+                },
+                "width": {
+                  "size": 23,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "width_tablet": {
+                  "size": 31,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "width_mobile": {
+                  "size": 44,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "css_classes": "sn-footer-column",
+                "_title": "دسته‌بندی‌ها"
+              },
+              "elements": [
+                {
+                  "id": "22db3c1",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "دسته‌بندی‌ها",
+                    "header_size": "h4",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 16,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 16,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#ffffff",
+                    "_css_classes": "sn-body-font",
+                    "_title": "دسته‌بندی‌ها"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                },
+                {
+                  "id": "0ec3f0c",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "مکمل‌ها",
+                    "header_size": "div",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#D7D2DD",
+                    "link": {
+                      "url": "{{home}}#sec-4",
+                      "is_external": "",
+                      "nofollow": ""
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "مکمل‌ها"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                },
+                {
+                  "id": "bb586b2",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "مراقبت پوست",
+                    "header_size": "div",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#D7D2DD",
+                    "link": {
+                      "url": "{{home}}#sec-4",
+                      "is_external": "",
+                      "nofollow": ""
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "مراقبت پوست"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                },
+                {
+                  "id": "22a0210",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "سلامت روزانه",
+                    "header_size": "div",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#D7D2DD",
+                    "link": {
+                      "url": "{{home}}#sec-4",
+                      "is_external": "",
+                      "nofollow": ""
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "سلامت روزانه"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                }
+              ]
+            },
+            {
+              "id": "d747a1f",
+              "elType": "container",
+              "settings": {
+                "content_width": "full",
+                "flex_direction": "column",
+                "flex_gap": {
+                  "column": "0",
+                  "row": "0",
+                  "isLinked": true,
+                  "unit": "px",
+                  "size": 0
+                },
+                "padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": true
+                },
+                "width": {
+                  "size": 23,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "width_tablet": {
+                  "size": 31,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "width_mobile": {
+                  "size": 44,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "css_classes": "sn-footer-column",
+                "_title": "برندها"
+              },
+              "elements": [
+                {
+                  "id": "9576b37",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "برندها",
+                    "header_size": "h4",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 16,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 16,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#ffffff",
+                    "_css_classes": "sn-body-font",
+                    "_title": "برندها"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                },
+                {
+                  "id": "99b7fea",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "ساپونین بالانس",
+                    "header_size": "div",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#D7D2DD",
+                    "link": {
+                      "url": "{{home}}#sec-4",
+                      "is_external": "",
+                      "nofollow": ""
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "ساپونین بالانس"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                },
+                {
+                  "id": "9a83f14",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "سرم بوتانیکال",
+                    "header_size": "div",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#D7D2DD",
+                    "link": {
+                      "url": "{{home}}#sec-4",
+                      "is_external": "",
+                      "nofollow": ""
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "سرم بوتانیکال"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                },
+                {
+                  "id": "8cb5109",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "ساشه جوشان",
+                    "header_size": "div",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#D7D2DD",
+                    "link": {
+                      "url": "{{home}}#sec-4",
+                      "is_external": "",
+                      "nofollow": ""
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "ساشه جوشان"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                },
+                {
+                  "id": "bec6327",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "ساپونین رادیانس",
+                    "header_size": "div",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#D7D2DD",
+                    "link": {
+                      "url": "{{home}}#sec-4",
+                      "is_external": "",
+                      "nofollow": ""
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "ساپونین رادیانس"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                }
+              ]
+            },
+            {
+              "id": "d8e80a3",
+              "elType": "container",
+              "settings": {
+                "content_width": "full",
+                "flex_direction": "column",
+                "flex_gap": {
+                  "column": "0",
+                  "row": "0",
+                  "isLinked": true,
+                  "unit": "px",
+                  "size": 0
+                },
+                "padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": true
+                },
+                "width": {
+                  "size": 23,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "width_tablet": {
+                  "size": 31,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "width_mobile": {
+                  "size": 44,
+                  "unit": "%",
+                  "sizes": []
+                },
+                "css_classes": "sn-footer-column",
+                "_title": "دسترسی سریع"
+              },
+              "elements": [
+                {
+                  "id": "1e3a138",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "دسترسی سریع",
+                    "header_size": "h4",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 16,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 16,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#ffffff",
+                    "_css_classes": "sn-body-font",
+                    "_title": "دسترسی سریع"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                },
+                {
+                  "id": "1d391c0",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "درباره ما",
+                    "header_size": "div",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#D7D2DD",
+                    "link": {
+                      "url": "{{home}}#sec-3",
+                      "is_external": "",
+                      "nofollow": ""
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "درباره ما"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                },
+                {
+                  "id": "d8a928a",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "تماس با ما",
+                    "header_size": "div",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#D7D2DD",
+                    "link": {
+                      "url": "{{home}}#sec-6",
+                      "is_external": "",
+                      "nofollow": ""
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "تماس با ما"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                },
+                {
+                  "id": "45fd936",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "مجله ساپونین",
+                    "header_size": "div",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#D7D2DD",
+                    "link": {
+                      "url": "{{home}}#sec-3",
+                      "is_external": "",
+                      "nofollow": ""
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "مجله ساپونین"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                },
+                {
+                  "id": "59191db",
+                  "elType": "widget",
+                  "settings": {
+                    "title": "داروخانه‌ها",
+                    "header_size": "div",
+                    "align": "start",
+                    "typography_typography": "custom",
+                    "typography_font_size": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "size": 14,
+                      "unit": "px",
+                      "sizes": []
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "size": 1.5,
+                      "unit": "em",
+                      "sizes": []
+                    },
+                    "title_color": "#D7D2DD",
+                    "link": {
+                      "url": "{{home}}#sec-5",
+                      "is_external": "",
+                      "nofollow": ""
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "sn-body-font",
+                    "_title": "داروخانه‌ها"
+                  },
+                  "elements": [],
+                  "widgetType": "heading"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "acc2c80",
+          "elType": "widget",
+          "settings": {
+            "editor": "<p>© ۱۴۰۵ شرکت داروسازی ساپونین. تمامی حقوق محفوظ است.</p>",
+            "align": "center",
+            "typography_typography": "custom",
+            "typography_font_size": {
+              "size": 12,
+              "unit": "px",
+              "sizes": []
+            },
+            "typography_line_height": {
+              "size": 2.1,
+              "unit": "em",
+              "sizes": []
+            },
+            "text_color": "#AAA3AF",
+            "_padding": {
+              "unit": "px",
+              "top": "20",
+              "right": "20",
+              "bottom": "8",
+              "left": "20",
+              "isLinked": false
+            },
+            "_border_border": "solid",
+            "_border_width": {
+              "unit": "px",
+              "top": "1",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "_border_color": "#ffffff19",
+            "_css_classes": "sn-body-font",
+            "_title": "© ۱۴۰۵ شرکت داروسازی ساپونین. تمامی"
+          },
+          "elements": [],
+          "widgetType": "text-editor"
+        },
+        {
+          "id": "e668f17",
+          "elType": "widget",
+          "settings": {
+            "title": "طراحی،توسعه و پشتیبانی با هلدینگ کلاسیکا",
+            "header_size": "div",
+            "align": "center",
+            "typography_typography": "custom",
+            "typography_font_size": {
+              "size": 14,
+              "unit": "px",
+              "sizes": []
+            },
+            "typography_font_size_mobile": {
+              "size": 14,
+              "unit": "px",
+              "sizes": []
+            },
+            "typography_font_weight": "400",
+            "typography_line_height": {
+              "size": 1.5,
+              "unit": "em",
+              "sizes": []
+            },
+            "title_color": "#AAA3AF",
+            "link": {
+              "url": "https://alimoradicoach.ir/",
+              "is_external": "",
+              "nofollow": ""
+            },
+            "_padding": {
+              "unit": "px",
+              "top": "4",
+              "right": "20",
+              "bottom": "88",
+              "left": "20",
+              "isLinked": false
+            },
+            "_css_classes": "sn-classika-credit sn-body-font",
+            "_title": "امضای هلدینگ کلاسیکا — متن و لینک قابل ویرایش"
+          },
+          "elements": [],
+          "widgetType": "heading"
+        }
+      ]
+    }
+  ],
+  "page_settings": {
+    "hide_title": "yes"
+  },
+  "saponine_schema": 2
+}

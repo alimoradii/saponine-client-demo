@@ -1,0 +1,59 @@
+/* Local fonts and low-specificity design defaults; Elementor controls can override. */
+@font-face{font-family:Vazirmatn;font-style:normal;font-weight:100 900;font-display:swap;src:url('../fonts/Vazirmatn.woff2') format('woff2')}
+@font-face{font-family:Outfit;font-style:normal;font-weight:100 900;font-display:swap;src:url('../fonts/Outfit.ttf') format('truetype')}
+:root{--sn-border:#e7ddeb;--sn-accent:#e5afd1;--saponine-primary:var(--sn-primary,#7d4697);--saponine-background:var(--sn-bg,#fbf9fc);--saponine-ink:var(--sn-text,#3c3c3a);--saponine-muted:var(--sn-muted,#777078);--saponine-border:var(--sn-border);--saponine-font-latin:var(--sn-font-latin,Outfit,Arial,sans-serif)}
+:where(.sn-panel){scroll-margin-top:100px;position:relative;isolation:isolate}
+:where(.elementor-widget-text-editor p:last-child){margin-bottom:0}
+:where(.sn-latin-font){direction:ltr}
+:where(.sn-header-bar){box-shadow:0 10px 40px -15px #27222e40}
+:where(body.admin-bar .sn-header-bar){margin-top:32px}
+.sn-brand-strip.e-con{inset-inline:0;margin-inline:auto;max-width:calc(100% - 32px);overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;box-shadow:0 10px 40px -15px #27222e40;backdrop-filter:blur(12px);scrollbar-width:none}
+.sn-brand-strip.e-con::-webkit-scrollbar{display:none}
+:where(.sn-strip-item){flex-shrink:0;white-space:nowrap;min-width:145px}
+:where(.sn-watermark){pointer-events:none;opacity:.65;user-select:none;z-index:-1}
+:where(.sn-bottle-body){box-shadow:inset -15px 0 22px #d3c4dd55,0 24px 40px -18px #58316e55}
+:where(.sn-bottle-neck){box-shadow:inset -8px 0 12px #d3c4dd55}
+:where(.sn-bottle-scene){position:relative;isolation:isolate}
+.sn-brands-panel.e-con{--overflow:clip;overflow:clip}
+:where(.sn-brand-motif){pointer-events:none;opacity:.6}
+:where(.sn-brand-card){box-shadow:0 10px 40px -15px #27222e30}
+:where(.sn-footer a){text-decoration:none}
+:where(.sn-footer a:hover){color:var(--sn-accent)}
+:where(body.elementor-editor-active .sn-brand-strip,body.elementor-editor-active .sn-header-bar){pointer-events:auto}
+@media(max-width:767px){:where(.sn-strip-item){min-width:140px}:where(.sn-watermark){opacity:.4}}
+@media(max-width:782px){:where(body.admin-bar .sn-header-bar){margin-top:46px}}
+
+/* Elementor's .e-con rules outrank :where() defaults. Keep real content fluid,
+   and contain only decorative overflow instead of creating a second canvas. */
+.sn-site-main,.sn-theme-header,.sn-theme-footer{min-inline-size:0;max-inline-size:100%}
+.sn-site-main>.elementor{inline-size:100%;min-inline-size:0;max-inline-size:100%}
+.sn-hero-section.e-con{--width:100%;max-width:100%;min-width:0;margin-inline:0}
+.sn-hero-section .elementor-widget-saponine-hero-slider,
+.sn-hero-section .elementor-widget-saponine-hero-slider>.elementor-widget-container{width:100%;max-width:100%;min-width:0}
+.sn-panel.e-con,.sn-footer.e-con{max-inline-size:100%}
+.sn-panel .e-con-inner,.sn-footer .e-con-inner{min-inline-size:0;max-inline-size:100%}
+.sn-panel :where(.elementor-widget-heading,.elementor-widget-text-editor),
+.sn-footer :where(.elementor-widget-heading,.elementor-widget-text-editor){overflow-wrap:anywhere}
+.sn-watermark.elementor-widget{max-inline-size:100%;overflow:clip}
+.sn-header-bar.e-con{max-inline-size:calc(100% - 24px)}
+.sn-header-bar .elementor-widget-image img{display:block;max-width:100%;height:auto;object-fit:contain}
+.elementor .sn-header-bar .elementor-widget-image img.sn-header-logo-compatible{width:168px;max-width:100%;height:auto}
+.sn-header-bar .sn-header-logo-plate{background:#fff;border-radius:8px;align-self:center}
+@media(max-width:1024px){
+ .sn-header-bar>.e-con,.sn-header-bar .elementor-widget-saponine-navigation,
+ .sn-header-bar .elementor-widget-saponine-search,.sn-header-bar .sp-nav,.sn-header-bar .sp-search{position:static}
+ .sn-header-bar .sp-nav.is-ready .sp-nav__items{inset-inline:0;min-width:0;width:100%;max-width:100%}
+ .sn-header-bar .sp-search__form{inset-inline:0;width:min(100%,420px);max-width:100%;margin-inline:auto}
+}
+@media(max-width:767px){
+ .sn-header-bar.e-con{flex-wrap:wrap;column-gap:10px;row-gap:8px}
+ .sn-header-bar.e-con>.e-con{width:auto;min-width:0;max-width:100%;flex:1 1 auto}
+ .sn-header-bar.e-con>.e-con:first-child{flex-wrap:nowrap}
+ .sn-header-bar.e-con>.e-con:last-child{flex-wrap:wrap;justify-content:flex-end}
+ .sn-header-bar .elementor-widget-saponine-search,
+ .sn-header-bar .elementor-widget-saponine-navigation{width:auto;flex:0 0 auto}
+ .sn-header-bar .elementor-widget-saponine-language-switcher{max-width:100%}
+ .elementor .sn-header-bar .elementor-widget-image img.sn-header-logo-compatible{width:112px}
+ .sn-brand-strip.e-con{max-width:calc(100% - 24px)}
+ .sn-footer .elementor-heading-title{overflow-wrap:anywhere}
+}

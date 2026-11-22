@@ -1,0 +1,28 @@
+/*
+Theme Name: Saponine Flex
+Description: پوستهٔ سبک ساپونین با پشتیبانی RTL/LTR و چندزبانه برای ویرایش آزاد با Elementor و Saponine Studio.
+Version: 1.4.4
+Requires at least: 6.8
+Requires PHP: 7.4
+Author: Saponine
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: saponine-flex
+Tags: custom-logo, custom-menu, featured-images, rtl-language-support, translation-ready, full-width-template, blog
+*/
+/* Horizontal decoration must never create a second page-wide scroll surface.
+   clip does not create a nested vertical scrolling container. */
+html{overflow-x:clip}
+body.wp-theme-saponine-flex{min-width:0;max-width:100%;overflow-x:clip}
+:root{--sn-primary:#7d4697;--sn-secondary:#f1e9f5;--sn-bg:#fbf9fc;--sn-text:#3c3c3a;--sn-muted:#777078;--sn-font-body:Tahoma,Arial,sans-serif;--sn-font-latin:Arial,sans-serif}
+/* Imported text inherits the selected local font. Element-specific Elementor
+   typography remains more specific and can override these defaults. */
+body .sn-body-font.elementor-widget-text-editor,
+body .sn-body-font .elementor-heading-title,
+body .sn-body-font .elementor-button,
+body .sn-body-font .widget-image-caption{font-family:var(--sn-font-body)}
+body .sn-latin-font.elementor-widget-text-editor,
+body .sn-latin-font .elementor-heading-title,
+body .sn-latin-font .elementor-button,
+body .sn-latin-font .widget-image-caption{font-family:var(--sn-font-latin)}
+*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:var(--sn-bg);color:var(--sn-text);font-family:var(--sn-font-body);line-height:1.8}a{color:inherit}img{max-width:100%;height:auto}button,input,textarea,select{font:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:not-allowed}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--sn-primary);outline-offset:4px}.screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;white-space:nowrap;width:1px}.screen-reader-text:focus{background:#fff;clip:auto;clip-path:none;color:#222;display:block;font-size:16px;height:auto;inset-block-start:12px;inset-inline-start:12px;padding:12px 20px;width:auto;z-index:100000}.sn-site-main{min-height:40vh}.sn-fallback-header{max-width:1300px;margin:18px auto;padding:18px 28px;background:#fff;border-radius:16px;display:flex;align-items:center;justify-content:space-between;gap:24px;box-shadow:0 8px 30px #5533660b}.sn-fallback-header a{text-decoration:none}.sn-site-brand{font-size:25px;font-weight:700;color:var(--sn-primary)}.sn-site-brand img{width:auto;max-height:56px}.sn-fallback-nav ul{display:flex;flex-wrap:wrap;gap:20px;list-style:none;margin:0;padding:0}.sn-fallback-nav li{position:relative}.sn-fallback-nav .sub-menu{display:none;position:absolute;top:100%;inset-inline-start:0;padding:12px;min-width:180px;background:white;box-shadow:0 6px 20px #0001;z-index:10}.sn-fallback-nav li:focus-within>.sub-menu,.sn-fallback-nav li:hover>.sub-menu{display:block}.sn-fallback-footer{padding:36px 24px;text-align:center;background:var(--sn-secondary);margin-top:50px}.sn-prose{width:min(100% - 40px,900px);margin:64px auto}.sn-prose h1{font-size:clamp(28px,5vw,45px);line-height:1.5}.sn-prose h2{margin-top:30px}.sn-prose a{color:var(--sn-primary)}.sn-prose .wp-post-image{border-radius:20px;margin:20px 0}.sn-entry{padding-bottom:30px;margin-bottom:30px;border-bottom:1px solid #ddd}.sn-entry-meta{font-size:14px;color:var(--sn-muted)}.sn-page-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}.sn-empty{text-align:center;padding:80px 20px}.sn-search-form{display:flex;gap:10px;max-width:650px}.sn-search-form input{min-width:0;flex:1;padding:12px;border:1px solid #d4c8db;border-radius:8px}.sn-search-form button{border:0;border-radius:8px;padding:12px 24px;background:var(--sn-primary);color:#fff}.sn-comment-list{padding:0;list-style:none}.sn-comment-list .comment{padding:20px;border-bottom:1px solid #ddd}.comment-form textarea,.comment-form input[type=text],.comment-form input[type=email],.comment-form input[type=url]{display:block;max-width:100%;width:100%;border:1px solid #d4c8db;border-radius:8px;padding:12px}.comment-form input[type=submit]{border:0;border-radius:8px;background:var(--sn-primary);color:#fff;padding:12px 24px}.alignwide{max-width:1100px}.alignfull{width:100vw;max-width:100vw;margin-inline:calc((100% - 100vw)/2)}.wp-caption-text,.gallery-caption{font-size:13px;color:var(--sn-muted)}.bypostauthor{border-inline-start:3px solid var(--sn-primary)}.sticky{border-inline-start:3px solid var(--sn-primary);padding-inline-start:20px}.sn-theme-header:empty,.sn-theme-footer:empty{display:none}@media(max-width:700px){.sn-fallback-header{margin:10px;padding:16px;flex-wrap:wrap}.sn-fallback-nav ul{gap:14px;font-size:14px}.sn-prose{margin-block:36px}.sn-search-form button{padding-inline:16px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

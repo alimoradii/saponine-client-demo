@@ -1,0 +1,55 @@
+/* Saved Elementor documents can keep desktop widths even after an addon update.
+   Bound real content to its parent and supply only missing responsive settings.
+   Explicit Elementor phone/tablet controls do not receive fallback classes. */
+.elementor .sn-panel.e-con .elementor-widget,
+.elementor .sn-footer.e-con .elementor-widget,
+.elementor .sn-hero-section.e-con .elementor-widget,
+.elementor .sn-header-bar.e-con .elementor-widget{min-width:0;max-width:100%}
+.elementor .sn-panel.e-con .e-con,
+.elementor .sn-footer.e-con .e-con{min-width:0;max-width:100%}
+.elementor .sn-panel.e-con .elementor-widget-container,
+.elementor .sn-footer.e-con .elementor-widget-container{min-width:0;max-width:100%}
+.sn-feature-copy .elementor-heading-title,.sn-feature-copy p,
+.sn-pharmacy-text p,.sn-footer-column p,.sn-footer-column a{overflow-wrap:anywhere}
+.sn-feature-icon.e-con,.sn-brand-logo.e-con{flex-shrink:0}
+.sn-feature-copy.e-con{min-width:0}
+.sn-about-actions.e-con{flex-wrap:wrap}
+.sn-header-main.e-con,.sn-header-actions.e-con{min-width:0}
+.sn-header-main .elementor-widget-saponine-navigation{min-width:0}
+.sn-header-actions .elementor-widget-saponine-search{flex:0 0 auto;width:auto}
+
+@media(min-width:768px) and (max-width:1024px){
+ .elementor .elementor-element.e-con.sn-layout-tablet-width{--width:var(--sn-layout-tablet-width);width:var(--sn-layout-tablet-width);max-width:100%}
+ .elementor .elementor-element.e-con.sn-layout-tablet-min-height{--min-height:var(--sn-layout-tablet-min-height);min-height:var(--sn-layout-tablet-min-height)}
+ .elementor .elementor-element.e-con.sn-layout-tablet-direction{--flex-direction:var(--sn-layout-tablet-direction);flex-direction:var(--sn-layout-tablet-direction)}
+ .elementor .elementor-element.e-con.sn-layout-tablet-direction>.e-con-inner{flex-direction:var(--sn-layout-tablet-direction)}
+ .elementor .elementor-element.e-con.sn-layout-tablet-wrap{--flex-wrap:var(--sn-layout-tablet-wrap);flex-wrap:var(--sn-layout-tablet-wrap)}
+ .elementor .elementor-element.e-con.sn-layout-tablet-wrap>.e-con-inner{flex-wrap:var(--sn-layout-tablet-wrap)}
+ .elementor .elementor-element.e-con.sn-layout-tablet-gap{--row-gap:var(--sn-layout-tablet-gap-row);--column-gap:var(--sn-layout-tablet-gap-column);gap:var(--sn-layout-tablet-gap-row) var(--sn-layout-tablet-gap-column)}
+ .elementor .elementor-element.e-con.sn-layout-tablet-padding{--padding-top:var(--sn-layout-tablet-padding-top);--padding-right:var(--sn-layout-tablet-padding-right);--padding-bottom:var(--sn-layout-tablet-padding-bottom);--padding-left:var(--sn-layout-tablet-padding-left)}
+ .elementor .elementor-element.elementor-widget.sn-layout-tablet-widget-width{--container-widget-width:var(--sn-layout-tablet-widget-width);width:var(--sn-layout-tablet-widget-width);max-width:100%}
+ .elementor .elementor-element.elementor-widget-image.sn-layout-tablet-image-width img{width:var(--sn-layout-tablet-image-width);max-width:100%}
+ .elementor .elementor-element.elementor-widget-image.sn-layout-tablet-image-height img{height:var(--sn-layout-tablet-image-height)}
+}
+@media(max-width:767px){
+ .elementor .elementor-element.e-con.sn-layout-mobile-width{--width:var(--sn-layout-mobile-width);width:var(--sn-layout-mobile-width);max-width:100%}
+ .elementor .elementor-element.e-con.sn-layout-mobile-min-height{--min-height:var(--sn-layout-mobile-min-height);min-height:var(--sn-layout-mobile-min-height)}
+ .elementor .elementor-element.e-con.sn-layout-mobile-direction{--flex-direction:var(--sn-layout-mobile-direction);flex-direction:var(--sn-layout-mobile-direction)}
+ .elementor .elementor-element.e-con.sn-layout-mobile-direction>.e-con-inner{flex-direction:var(--sn-layout-mobile-direction)}
+ .elementor .elementor-element.e-con.sn-layout-mobile-wrap{--flex-wrap:var(--sn-layout-mobile-wrap);flex-wrap:var(--sn-layout-mobile-wrap)}
+ .elementor .elementor-element.e-con.sn-layout-mobile-wrap>.e-con-inner{flex-wrap:var(--sn-layout-mobile-wrap)}
+ .elementor .elementor-element.e-con.sn-layout-mobile-gap{--row-gap:var(--sn-layout-mobile-gap-row);--column-gap:var(--sn-layout-mobile-gap-column);gap:var(--sn-layout-mobile-gap-row) var(--sn-layout-mobile-gap-column)}
+ .elementor .elementor-element.e-con.sn-layout-mobile-padding{--padding-top:var(--sn-layout-mobile-padding-top);--padding-right:var(--sn-layout-mobile-padding-right);--padding-bottom:var(--sn-layout-mobile-padding-bottom);--padding-left:var(--sn-layout-mobile-padding-left)}
+ .elementor .elementor-element.elementor-widget.sn-layout-mobile-widget-width{--container-widget-width:var(--sn-layout-mobile-widget-width);width:var(--sn-layout-mobile-widget-width);max-width:100%}
+ .elementor .elementor-element.elementor-widget-image.sn-layout-mobile-image-width img{width:var(--sn-layout-mobile-image-width);max-width:100%}
+ .elementor .elementor-element.elementor-widget-image.sn-layout-mobile-image-height img{height:var(--sn-layout-mobile-image-height)}
+ .elementor .sn-header-bar.e-con{align-items:center}
+ .elementor .sn-header-bar.e-con>.e-con.sn-header-main{width:var(--width);flex:0 1 auto;min-width:0;justify-content:space-between;flex-wrap:nowrap}
+ .elementor .sn-header-bar.e-con>.e-con.sn-header-actions{width:var(--width);flex:0 1 auto;min-width:0;justify-content:flex-end;flex-wrap:wrap}
+ .sn-header-main .elementor-widget-image{flex:0 1 auto}
+ .sn-header-main .elementor-widget-saponine-navigation{flex:0 0 auto;width:auto}
+ .sn-header-actions .elementor-widget-button{flex:0 0 auto}
+ .sn-header-bar .sp-nav__items{max-height:60svh;overflow-y:auto;overscroll-behavior:contain}
+ .sn-brand-logo.e-con,.sn-footer-logo-plate.e-con{align-self:center}
+ .sn-feature-copy.e-con{min-width:0}
+}

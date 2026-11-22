@@ -1,0 +1,18 @@
+/* The controller moves the normal document, never an overflow-hidden wrapper.
+   Long sections and non-section pages retain access to all their content. */
+html.sn-section-scroll-ready .sn-panel,
+html.sn-section-scroll-ready .sn-hero-section,
+html.sn-section-scroll-ready .sn-footer {
+  scroll-margin-block-start: var(--sn-scroll-admin-offset, 0px);
+}
+
+/* A local rAF tween supplies its own easing. Disable native smooth scrolling
+   only while that tween runs so two animations cannot fight each other. */
+html.sn-section-scroll-running {
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.sn-section-scroll-ready { scroll-behavior: auto; }
+}

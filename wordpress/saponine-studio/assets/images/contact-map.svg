@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" preserveAspectRatio="xMidYMid slice">
+  <title>نقشه شماتیک موقعیت نمونه</title>
+  <defs>
+    <pattern id="blocks" width="76" height="54" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)">
+      <rect width="76" height="54" fill="#ece9e8"/>
+      <path d="M0 0H76V54M0 26h42m0-26v54m23-28v28" stroke="#fff" fill="none" stroke-width="3"/>
+      <path d="M5 5h13v9H5zm20 0h11v15H25zm23 4h20v13H48zM7 34h17v12H7zm22 1h8v12h-8zm20-4h9v9h-9z" fill="#e0dbdc"/>
+    </pattern>
+    <pattern id="north" width="58" height="48" patternUnits="userSpaceOnUse" patternTransform="rotate(19)">
+      <rect width="58" height="48" fill="#ece8e6"/>
+      <path d="M0 0H58V48M0 29h58M24 0v29m19 0v19" stroke="white" stroke-width="3" fill="none"/>
+      <path d="M4 5h15v16H4zm27 2h20v14H31zm-24 27h14v8H7zm20 1h12v8H27z" fill="#dfdcdb"/>
+    </pattern>
+    <g id="arteries" fill="none" stroke-linecap="round">
+      <path d="M-20 346C78 307 106 265 208 238S334 198 391 151 504 97 582 89 718 67 824 31"/>
+      <path d="M152-19C167 80 183 111 197 166S214 261 208 322 234 426 249 488"/>
+      <path d="M-25 116C71 118 131 113 189 120S313 125 381 153 497 209 556 225 715 257 824 252"/>
+      <path d="M592-14C565 72 555 152 555 225S565 344 533 487"/>
+    </g>
+  </defs>
+  <rect width="800" height="470" fill="url(#blocks)"/>
+  <path d="M-20 0h380l12 120-141 63-31-61L0 110Z" fill="url(#north)"/>
+  <path d="m568 226 232 29v215H539l22-118Z" fill="url(#north)"/>
+  <g fill="#cddfc9" stroke="#b9d0b6" stroke-width="1.4">
+    <path d="m38 174 54-22 25 43-22 18-31 6Z"/>
+    <path d="m297 294 50-16 14 38 21 27-48 23-23-23Z"/>
+    <path d="m594 142 67-8 12 17 3 35-63-5Z"/>
+    <path d="m688 330 62-15 14 40-37 29-36-18Z"/>
+    <path d="m204 82 45-9 11 28-45 10Z"/>
+  </g>
+  <g fill="none" stroke="#fff" stroke-width="6">
+    <path d="M29-14q33 66 47 136t37 116 56 109 34 142M351-12q-23 64-20 120t22 74 44 126 12 185M459-12q-25 85 3 139t12 103-14 107 11 150"/>
+    <path d="M-8 61q102 3 190 20t193-5 160-22 124 1 158-21M-16 208q82-21 168-28t145 10 121 55 163 44 235 38"/>
+    <path d="M-12 411q124-40 216-49t177-10 179-12 250-17M668-7q10 91 9 142t18 103 6 119 19 128"/>
+  </g>
+  <use href="#arteries" stroke="#e2c38d" stroke-width="12"/>
+  <use href="#arteries" stroke="#f8e9c5" stroke-width="8"/>
+  <g fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="1.6">
+    <path d="m42 179 39 24 22-19m195 119 32 16 22 36m244-208 59 19"/>
+  </g>
+</svg>

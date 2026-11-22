@@ -1,0 +1,3 @@
+/* Content stays visible before JavaScript and when motion is disabled. */
+[data-sn-motion]{backface-visibility:hidden}
+@media(prefers-reduced-motion:reduce){[data-sn-motion]{scroll-behavior:auto}}
