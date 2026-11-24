@@ -28,8 +28,11 @@
     const duration = milliseconds(config.duration, 1200);
     let index = Math.max(0, slides.findIndex(slide => slide.classList.contains('is-active')));
     let timer = 0;
-    let focusPaused = false;
+    let disposed = false;
+    const keyboardFocusInside = () => root.contains(document.activeElement) && document.activeElement.matches(':focus-visible');
+    let focusPaused = keyboardFocusInside();
     let hoverPaused = false;
+    let ignoreHoverUntilLeave = false;
     let userPaused = false;
     let inView = true;
     let touchStart = null;
@@ -40,6 +43,7 @@
     const canPlay = () => config.autoplay && interval > 0 && slides.length > 1 && !userPaused && !focusPaused && !hoverPaused && !motion.matches && !document.hidden && inView && !editor;
 
     function schedule() {
+      if (disposed) return;
       window.clearTimeout(timer);
       const playing = canPlay();
       if (live) live.setAttribute('aria-live', playing ? 'off' : 'polite');
@@ -81,45 +85,98 @@
       if (editor) pause.setAttribute('aria-label', labels.editor || 'Autoplay paused in the editor; use the slide controls');
     }
 
+    function pauseForFocus(value) {
+      if (focusPaused === value) return;
+      focusPaused = value;
+      schedule();
+    }
+
+    function pauseForHover(value) {
+      if (hoverPaused === value) return;
+      hoverPaused = value;
+      schedule();
+    }
+
     dots.forEach(dot => listen(dot, 'click', () => show(Number(dot.dataset.spSlide), true), removers));
     const prev = root.querySelector('[data-sp-prev]');
     const next = root.querySelector('[data-sp-next]');
     if (prev) listen(prev, 'click', () => show(index - 1, true), removers);
     if (next) listen(next, 'click', () => show(index + 1, true), removers);
-    if (pause) listen(pause, 'click', () => { userPaused = !userPaused; paintPause(); schedule(); }, removers);
-    listen(root, 'focusin', () => { focusPaused = true; schedule(); }, removers);
-    listen(root, 'focusout', event => { if (!root.contains(event.relatedTarget)) { focusPaused = false; schedule(); } }, removers);
+    if (pause) listen(pause, 'click', () => {
+      userPaused = !userPaused;
+      if (!userPaused) {
+        // Play takes effect while the activating button still has focus or hover.
+        ignoreHoverUntilLeave = hoverPaused;
+        hoverPaused = false;
+        focusPaused = false;
+      }
+      paintPause();
+      schedule();
+    }, removers);
+    listen(root, 'focusin', event => pauseForFocus(event.target.matches(':focus-visible')), removers);
+    listen(root, 'focusout', event => { if (!root.contains(event.relatedTarget)) pauseForFocus(false); }, removers);
     if (config.pauseHover) {
-      listen(root, 'mouseenter', () => { hoverPaused = true; schedule(); }, removers);
-      listen(root, 'mouseleave', () => { hoverPaused = false; schedule(); }, removers);
+      // Scrolling a full-screen slide underneath the cursor fires enter events.
+      // Only a moving mouse (or a mouse click below) expresses hover intent.
+      listen(root, 'pointermove', event => {
+        if (event.pointerType === 'mouse' && !ignoreHoverUntilLeave && (event.movementX || event.movementY)) pauseForHover(true);
+      }, removers, { passive: true });
+      listen(root, 'pointerleave', event => {
+        if (event.pointerType !== 'mouse') return;
+        ignoreHoverUntilLeave = false;
+        pauseForHover(false);
+      }, removers);
     }
     listen(root, 'keydown', event => {
+      pauseForFocus(true);
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
       if (event.target.matches('input,textarea,select,[contenteditable]')) return;
       event.preventDefault();
       show(index + (event.key === 'ArrowRight' ? 1 : -1), true);
     }, removers);
     listen(root, 'pointerdown', event => {
-      if (event.pointerType === 'touch' && !event.target.closest('a,button')) touchStart = { x: event.clientX, y: event.clientY };
+      pauseForFocus(false);
+      if (config.pauseHover && event.pointerType === 'mouse' && !ignoreHoverUntilLeave) pauseForHover(true);
+      if (event.pointerType === 'touch') {
+        pauseForHover(false);
+        touchStart = event.isPrimary !== false && !event.target.closest('a,button')
+          ? { id: event.pointerId, x: event.clientX, y: event.clientY } : null;
+      }
     }, removers, { passive: true });
     listen(root, 'pointerup', event => {
-      if (!touchStart) return;
+      if (!touchStart || event.pointerId !== touchStart.id) return;
       const dx = event.clientX - touchStart.x;
       const dy = event.clientY - touchStart.y;
       touchStart = null;
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) show(index + (dx < 0 ? 1 : -1), true);
     }, removers, { passive: true });
     listen(root, 'pointercancel', () => { touchStart = null; }, removers, { passive: true });
-    listen(document, 'visibilitychange', schedule, removers);
+    function resumeWhenVisible() {
+      // Hover can end without a leave event while the page is suspended.
+      hoverPaused = false;
+      ignoreHoverUntilLeave = false;
+      schedule();
+    }
+    listen(document, 'visibilitychange', resumeWhenVisible, removers);
+    listen(window, 'pageshow', event => { if (event.persisted) resumeWhenVisible(); }, removers);
     listen(motion, 'change', () => { paintPause(); schedule(); }, removers);
     let observer;
     if ('IntersectionObserver' in window) {
-      observer = new IntersectionObserver(entries => { inView = entries[0].isIntersecting; schedule(); }, { threshold: 0.05 });
+      observer = new IntersectionObserver(entries => {
+        const visible = entries[entries.length - 1].isIntersecting;
+        if (inView === visible) return;
+        inView = visible;
+        if (!inView) {
+          hoverPaused = false;
+          ignoreHoverUntilLeave = false;
+        }
+        schedule();
+      }, { threshold: 0.05 });
       observer.observe(root);
     }
     paintPause();
     show(index, false);
-    return () => { window.clearTimeout(timer); if (observer) observer.disconnect(); removers.forEach(fn => fn()); };
+    return () => { disposed = true; window.clearTimeout(timer); if (observer) observer.disconnect(); removers.forEach(fn => fn()); };
   }
 
   function navigation(root) {

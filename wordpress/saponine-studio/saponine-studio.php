@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Saponine Studio
  * Description: ویرایش بصری ساپونین؛ ابزارهای متحرک المنتور، سربرگ و پابرگ آزاد و درون‌ریز محلی.
- * Version: 1.5.2
+ * Version: 1.5.3
  * Requires at least: 6.8
  * Requires PHP: 7.4
  * Requires Plugins: elementor
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'SAPONINE_STUDIO_VERSION', '1.5.2' );
+define( 'SAPONINE_STUDIO_VERSION', '1.5.3' );
 define( 'SAPONINE_STUDIO_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SAPONINE_STUDIO_URL', plugin_dir_url( __FILE__ ) );
 

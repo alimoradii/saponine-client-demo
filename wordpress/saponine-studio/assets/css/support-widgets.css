@@ -6,6 +6,7 @@
 .sp-hero button:focus-visible,.sp-hero a:focus-visible,.sp-nav button:focus-visible,.sp-nav a:focus-visible,.sp-marquee button:focus-visible,.sp-rail a:focus-visible{outline:2px solid currentColor;outline-offset:5px}
 
 /* Hero */
+.sp-hero[tabindex="0"]{touch-action:pan-y pinch-zoom}
 .sp-hero{--sp-hero-text-inset:4%;--sp-hero-control-inset:5%;--sp-hero-accent:var(--saponine-primary,#8740b4);--sp-hero-duration:1200ms;--sp-hero-text-delay:300ms;--sp-hero-float-distance:16px;--sp-hero-float-duration:6s;position:relative;width:100%;max-width:100%;min-width:0;height:var(--sp-hero-height,100svh);min-height:var(--sp-hero-min-height,640px);overflow:hidden;background:linear-gradient(100deg,#ddd0f4,#f0ddec 55%,#f6dbe1);isolation:isolate}
 .sp-hero__slides{position:absolute;inset:0}
 .sp-hero__slide{position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--sp-hero-duration) ease,transform var(--sp-hero-duration) ease,visibility 0s var(--sp-hero-duration);transform:scale(1.05)}
