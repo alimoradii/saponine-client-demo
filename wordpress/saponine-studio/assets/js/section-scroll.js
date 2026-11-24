@@ -29,8 +29,9 @@
   let refreshFrame = 0;
   let touchTimer = 0;
   let lastWritten = 0;
+  let lastWheelMove = -Infinity;
   let settled = null;
-  let gesture = { last: -Infinity, direction: 0, total: 0, used: false };
+  let gesture = { last: -Infinity, direction: 0, distance: 0, peak: 0, total: 0, used: false };
   let touch = null;
   let touchDestination = null;
   let destroyed = false;
@@ -115,7 +116,14 @@
     catch (_) { window.scrollTo(window.scrollX || 0, lastWritten); }
   }
 
-  function finishMove(target, options) {
+  function followWheel(top) {
+    root.classList.add('sn-section-scroll-running');
+    writeScroll(top);
+    root.classList.remove('sn-section-scroll-running');
+    settled = null;
+  }
+
+  function finishMove(target, options, pending = animation && animation.pending) {
     stopAnimation();
     settled = target ? { node: target.node, align: options.align || 'start' } : null;
     if (options.focus && target && target.node.isConnected) {
@@ -125,9 +133,14 @@
       if (!hadTabindex) target.node.addEventListener('blur', () => target.node.removeAttribute('tabindex'), { once: true });
     }
     if (target) document.dispatchEvent(new CustomEvent('saponine:sectionchange', { detail: { id: target.node.id, index: panels.indexOf(target), source: options.source || 'api' } }));
+    if (pending && !animation && settled && settled.node === target.node && sectionMode() && !document.hidden &&
+        pending.origin.isConnected && !blocksNavigation(pending.origin, Math.sign(pending.delta))) {
+      gesture.used = false;
+      advanceWheel(pending.delta, pending.discrete);
+    }
   }
 
-  function moveTo(top, options = {}) {
+  function moveTo(top, options = {}, pending = null) {
     stopAnimation();
     const from = y();
     const to = Math.max(0, Math.min(maximum(), top));
@@ -136,16 +149,17 @@
     root.classList.add('sn-section-scroll-running');
     if (!duration || Math.abs(to - from) < 1) {
       writeScroll(to);
-      finishMove(target, options);
+      finishMove(target, options, pending);
       return;
     }
     const started = performance.now();
     lastWritten = from;
-    animation = { direction: Math.sign(to - from), target, options, to };
+    animation = { direction: Math.sign(to - from), target, options, to, pending };
     function tick(now) {
       if (!animation || destroyed) return;
       const progress = Math.min(1, Math.max(0, (now - started) / duration));
-      const eased = progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+      const eased = options.source === 'wheel' ? 1 - Math.pow(1 - progress, 3)
+        : progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
       writeScroll(from + (to - from) * eased);
       if (progress < 1) animationFrame = window.requestAnimationFrame(tick);
       else finishMove(target, options);
@@ -159,11 +173,12 @@
     const before = settled && panels.find(panel => panel.node === settled.node);
     const aligned = before && Math.abs(y() - (settled.align === 'end' ? before.end : before.start)) < EPSILON;
     const oldNodes = panels.map(panel => panel.node);
+    const oldPanels = new Map(panels.map(panel => [panel.node, panel]));
     const candidates = Array.from(document.querySelectorAll(selector)).filter(node =>
       visible(node) && !node.closest('[data-sn-scroll-ignore],dialog,.elementor-popup-modal') &&
       (/^sec-\d+$/.test(node.id) || node.matches('.sn-panel,.sn-hero-section,.sn-footer'))
     );
-    panels = candidates.filter(node => !candidates.some(other => other !== node && other.contains(node))).map(node => ({ node }));
+    panels = candidates.filter(node => !candidates.some(other => other !== node && other.contains(node))).map(node => oldPanels.get(node) || { node });
     measure();
     root.classList.toggle('sn-section-scroll-ready', ready());
     if (!ready()) stopAnimation();
@@ -175,13 +190,18 @@
       document.querySelectorAll('.sn-header-bar').forEach(header => resizeObserver.observe(header));
     }
     if (animation) {
-      const ongoing = animation;
-      const target = ongoing.target && panels.find(panel => panel.node === ongoing.target.node);
-      stopAnimation();
-      if (target && ready()) moveTo(ongoing.options.align === 'end' ? target.end : target.start, { ...ongoing.options, target, duration: Math.min(config.duration, 300) });
+      const { target, options, to, pending } = animation;
+      if (target && !panels.includes(target)) stopAnimation();
+      else if (target) {
+        const destination = options.align === 'end' ? target.end : target.start;
+        if (Math.abs(destination - to) > EPSILON) moveTo(destination, { ...options, target, duration: Math.min(config.duration, 300) }, pending);
+      }
     } else if (aligned && ready()) {
       const target = panels.find(panel => panel.node === settled.node);
-      if (target) moveTo(settled.align === 'end' ? target.end : target.start, { target, align: settled.align, instant: true, source: 'resize' });
+      if (target) {
+        const destination = settled.align === 'end' ? target.end : target.start;
+        if (Math.abs(destination - y()) > EPSILON) moveTo(destination, { target, align: settled.align, instant: true, source: 'resize' });
+      }
     }
   }
 
@@ -233,7 +253,7 @@
   }
 
   function wheel(event) {
-    if (!sectionMode() || !event.cancelable || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    if (!sectionMode() || event.defaultPrevented || !event.cancelable || event.ctrlKey || event.metaKey || event.shiftKey) return;
     const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? viewport() : 1;
     const delta = event.deltaY * unit;
     if (!delta || Math.abs(event.deltaX) > Math.abs(event.deltaY) * 0.85) return;
@@ -242,29 +262,67 @@
     touchDestination = null;
     window.clearTimeout(touchTimer);
     const now = performance.now();
+    const gap = now - gesture.last;
+    const distance = Math.abs(delta);
     const reverse = gesture.direction && direction !== gesture.direction;
-    if (now - gesture.last > GESTURE_IDLE || reverse) gesture = { last: now, direction, total: 0, used: false };
+    // Detents can keep arriving regularly long after a transition finishes.
+    // A trailing trackpad packet is usually smaller and closer to its predecessor.
+    const discrete = event.deltaMode !== 0;
+    const renewed = distance >= gesture.distance && (distance >= config.threshold || distance >= gesture.peak);
+    const sustained = now - lastWheelMove >= GESTURE_IDLE &&
+      (distance >= gesture.peak || (distance >= config.threshold && distance > gesture.distance * 1.5));
+    const nextNotch = !animation && gesture.used && ((gap >= 50 && (discrete || renewed)) || sustained);
+    if (gap > GESTURE_IDLE || reverse || nextNotch) {
+      gesture.total = 0;
+      gesture.peak = 0;
+      gesture.used = false;
+    }
     gesture.last = now;
     gesture.direction = direction;
-    if (reverse && animation && animation.direction !== direction) stopAnimation();
-    if (animation || gesture.used) { event.preventDefault(); return; }
-    const step = planStep(direction);
-    if (!step) return;
-    event.preventDefault();
-    if (step.inside) {
-      const panel = step.inside;
-      const next = Math.max(panel.start, Math.min(panel.end, y() + delta));
-      root.classList.add('sn-section-scroll-running');
-      writeScroll(next);
-      root.classList.remove('sn-section-scroll-running');
-      settled = null;
-      if (Math.abs(next - (direction > 0 ? panel.end : panel.start)) <= EPSILON) gesture.used = true;
+    gesture.distance = distance;
+    gesture.peak = Math.max(gesture.peak, distance);
+    if (animation && animation.options.source === 'wheel' && gap > GESTURE_IDLE) {
+      animation.pending = { delta, discrete, origin: event.target };
+      gesture.used = true;
+      event.preventDefault();
       return;
     }
-    gesture.total += Math.abs(delta);
-    if (gesture.total < config.threshold) return;
+    if (reverse && animation) {
+      animation.pending = null;
+      if (animation.direction !== direction) stopAnimation();
+    }
+    if (animation || gesture.used) { event.preventDefault(); return; }
+    if (advanceWheel(delta, discrete)) event.preventDefault();
+  }
+
+  function advanceWheel(delta, discrete) {
+    const direction = Math.sign(delta);
+    const distance = Math.abs(delta);
+    let step = planStep(direction);
+    if (!step) return false;
+    if (step.inside) {
+      const panel = step.inside;
+      const boundary = direction > 0 ? panel.end : panel.start;
+      const remaining = Math.abs(boundary - y());
+      const neighbor = panels[panels.indexOf(panel) + direction];
+      if (distance <= remaining || !neighbor) {
+        followWheel(Math.max(panel.start, Math.min(panel.end, y() + delta)));
+        return true;
+      }
+      // The same wheel stroke can finish reading a tall section and leave it.
+      step = { target: neighbor, align: direction < 0 && neighbor.tall ? 'end' : 'start' };
+    }
+    const destination = step.align === 'end' ? step.target.end : step.target.start;
+    gesture.total += distance;
+    if (!discrete && gesture.total < config.threshold) {
+      // Fine wheel/trackpad motion stays visible while intent accumulates.
+      followWheel(y() + direction * Math.min(distance, Math.abs(destination - y())));
+      return true;
+    }
     gesture.used = true;
-    goTo(step.target.node, { align: step.align, source: 'wheel' });
+    lastWheelMove = performance.now();
+    moveTo(destination, { target: step.target, align: step.align, source: 'wheel' });
+    return true;
   }
 
   function keyboard(event) {
@@ -328,7 +386,7 @@
 
   function pointerDown(event) {
     stopAnimation();
-    gesture = { last: -Infinity, direction: 0, total: 0, used: false };
+    gesture = { last: -Infinity, direction: 0, distance: 0, peak: 0, total: 0, used: false };
     touchDestination = null;
     window.clearTimeout(touchTimer);
     if (event.pointerType === 'touch' && event.isPrimary === false) { touch = null; return; }
